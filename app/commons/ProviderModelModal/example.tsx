@@ -54,8 +54,7 @@ export const ExampleButton: React.FC = () => {
 
 // 3. Or use the hook to programmatically control the modal
 export const ExampleProgrammaticControl: React.FC = () => {
-  const { openModal, closeModal, isOpen, selectedModel } =
-    useProviderModelModal()
+  const { openModal, selectedModel } = useProviderModelModal()
 
   return (
     <div className="p-4">

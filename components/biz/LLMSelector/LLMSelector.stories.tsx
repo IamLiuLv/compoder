@@ -72,7 +72,7 @@ export const Disabled: Story = {
 
 // Interactive example with state
 export const Interactive: Story = {
-  render: () => {
+  render: function InteractiveStory() {
     const [provider, setProvider] = useState<AIProvider | undefined>()
     const [model, setModel] = useState<string | undefined>()
 

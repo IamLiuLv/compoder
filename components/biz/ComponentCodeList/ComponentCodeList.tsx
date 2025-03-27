@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Pencil, Trash2, Copy } from "lucide-react"
+import { Trash2 } from "lucide-react"
 import type { ComponentCodeListProps } from "./interface"
 import { motion, AnimatePresence } from "framer-motion"
 import { useState, useEffect, useRef } from "react"

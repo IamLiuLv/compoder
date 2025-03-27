@@ -16,7 +16,7 @@ interface LLMSelectorButtonProps {
 const LLMSelectorButton: React.FC<LLMSelectorButtonProps> = ({
   disabled = false,
 }) => {
-  const { options, loading, error } = useLLMOptions()
+  const { options, loading } = useLLMOptions()
   const { provider, model, setLLM } = useLLMSelectorContext()
 
   // 当选择LLM时

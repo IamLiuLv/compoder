@@ -178,6 +178,7 @@ export const ControlBar: React.FC<ControlBarProps> = ({
         fullPath,
       }
     } catch (e) {
+      console.error("Failed to parse code renderer server:", e)
       return {
         host: codeRendererServer,
         port: "",

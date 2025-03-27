@@ -102,7 +102,7 @@ export const deleteComponentCode = async (
     const queryString = new URLSearchParams(
       filteredParams as Record<string, string>,
     ).toString()
-    const response = await request(`/componentCode/delete?${queryString}`, {
+    await request(`/componentCode/delete?${queryString}`, {
       method: "DELETE",
     })
 

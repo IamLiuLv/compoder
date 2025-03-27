@@ -2,7 +2,6 @@
 
 import React, { useCallback } from "react"
 import { Loading } from "@/components/biz/Loading"
-import { mockData } from "@/components/biz/AppSidebarLayout/mock-data"
 import useRoutes from "@/hooks/use-routes"
 import { useSession, signOut } from "next-auth/react"
 import { redirect } from "next/navigation"
@@ -62,7 +61,7 @@ export default function MainLayout({
 }: {
   children: React.ReactNode
 }) {
-  const { status, data, update } = useSession()
+  const { status, data } = useSession()
 
   const user = {
     name: data?.user?.name || "",

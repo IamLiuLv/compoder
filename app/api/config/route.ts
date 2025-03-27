@@ -5,6 +5,9 @@ import {
   ProcessedAIProviderConfig,
 } from "@/lib/config/ai-providers"
 import { validateSession } from "@/lib/auth/middleware"
+
+export const dynamic = "force-dynamic"
+
 /**
  * API route that returns the config.json file content
  * This allows the frontend to access the configuration without exposing API keys directly

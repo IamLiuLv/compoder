@@ -3,18 +3,7 @@
 import React, { useState, useEffect } from "react"
 import { Logo } from "../Logo"
 import { CompoderBannerProps } from "./interface"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import {
-  Star,
-  Sparkles,
-  ArrowRight,
-  Code,
-  Terminal,
-  Lock,
-  ShieldCheck,
-  Zap,
-} from "lucide-react"
+import { Sparkles, Code, Terminal, Lock, ShieldCheck, Zap } from "lucide-react"
 import "./CompoderBanner.css"
 
 // default theme colors
@@ -32,14 +21,11 @@ export const CompoderBanner: React.FC<CompoderBannerProps> = ({
   title = "Compoder",
   subtitle = "AI-Powered Component Code Generator",
   description = "Your Stack, Your UI - Component Code Generator for Every Design Engineer",
-  showGithubStar = true,
-  githubUrl = "https://github.com/yourusername/compoder",
   tagline = "Generate component code in seconds",
   className = "",
   cyberpunkLevel = "medium",
   matrixDensity = 50,
   glowColor,
-  actionButtonLabel = "Get Started",
   cornerStyle = "angled",
   colorTheme = "blueviolet",
   enableFlickerEffect = false,

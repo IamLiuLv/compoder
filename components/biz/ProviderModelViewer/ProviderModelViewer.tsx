@@ -28,7 +28,7 @@ const ProviderModelViewer: React.FC<ProviderModelViewerProps> = ({
   onModelSelect,
   onRefresh,
 }) => {
-  const [showSensitive, setShowSensitive] = useState<boolean>(showSensitiveInfo)
+  const [showSensitive] = useState<boolean>(showSensitiveInfo)
   const [expandedProviders, setExpandedProviders] = useState<string[]>([])
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false)
 

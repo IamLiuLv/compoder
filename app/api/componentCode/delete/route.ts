@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
 import { deleteComponentCode } from "@/lib/db/componentCode/mutations"
-import type { ComponentCodeApi } from "../type"
 import { validateSession } from "@/lib/auth/middleware"
 import { connectToDatabase } from "@/lib/db/mongo"
 

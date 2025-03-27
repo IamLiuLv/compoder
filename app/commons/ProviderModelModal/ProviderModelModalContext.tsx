@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react"
-import { Model, Provider } from "@/components/biz/ProviderModelViewer/interface"
+import { Model } from "@/components/biz/ProviderModelViewer/interface"
 
 interface ProviderModelModalContextType {
   // 是否显示模态框

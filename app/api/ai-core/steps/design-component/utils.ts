@@ -117,7 +117,6 @@ const buildCurrentComponentMessage = (
 // Build user message
 const buildUserMessage = (
   prompt: WorkflowContext["query"]["prompt"],
-  component?: WorkflowContext["query"]["component"],
 ): Array<CoreMessage> => {
   return [
     {
@@ -205,7 +204,7 @@ export async function generateComponentDesign(
   console.log("design-component systemPrompt:", systemPrompt)
   const messages = [
     ...buildCurrentComponentMessage(req.query.component),
-    ...buildUserMessage(req.query.prompt, req.query.component),
+    ...buildUserMessage(req.query.prompt),
   ]
 
   try {

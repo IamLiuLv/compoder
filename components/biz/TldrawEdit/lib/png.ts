@@ -178,8 +178,8 @@ export class PngHelpers {
     const crcBit = new Uint8Array(pHYsData.slice(4, 17))
     pHYsDataView.setInt32(17, crc(crcBit))
 
-    const startBuf = view.buffer.slice(0, offset)
-    const endBuf = view.buffer.slice(offset + size)
+    const startBuf = view.buffer.slice(0, offset) as ArrayBuffer
+    const endBuf = view.buffer.slice(offset + size) as ArrayBuffer
 
     return new Blob([startBuf, pHYsData, endBuf], options)
   }
