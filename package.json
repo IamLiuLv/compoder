@@ -15,7 +15,11 @@
     "dev:artifacts:shadcn-ui-renderer": "pnpm --filter shadcn-ui-renderer dev",
     "dev:artifacts:antd-renderer": "pnpm --filter antd-renderer dev",
     "dev:artifacts:html-renderer": "pnpm --filter html-renderer dev",
-    "dev:artifacts:material-ui-renderer": "pnpm --filter material-ui-renderer dev"
+    "dev:artifacts:material-ui-renderer": "pnpm --filter material-ui-renderer dev",
+    "start:docker": "docker compose up -d",
+    "start:all": "concurrently \"pnpm start:docker\" \"pnpm dev\" \"pnpm storybook\" \"pnpm dev:artifacts:element-ui-plus-renderer\" \"pnpm dev:artifacts:shadcn-ui-renderer\" \"pnpm dev:artifacts:antd-renderer\" \"pnpm dev:artifacts:html-renderer\" \"pnpm dev:artifacts:material-ui-renderer\"",
+    "stop:docker": "docker compose down",
+    "stop:all": "pnpm stop:docker && pkill -f 'node'"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^1.1.17",
@@ -88,6 +92,7 @@
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^8.26.0",
     "@typescript-eslint/parser": "^8.26.0",
+    "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "eslint": "^8",
