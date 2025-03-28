@@ -16,7 +16,7 @@
     "dev:artifacts:antd-renderer": "pnpm --filter antd-renderer dev",
     "dev:artifacts:html-renderer": "pnpm --filter html-renderer dev",
     "dev:artifacts:material-ui-renderer": "pnpm --filter material-ui-renderer dev",
-    "dev:all": "concurrently \"pnpm start:docker\" \"pnpm dev\" \"pnpm storybook\" \"pnpm dev:artifacts:element-ui-plus-renderer\" \"pnpm dev:artifacts:shadcn-ui-renderer\" \"pnpm dev:artifacts:antd-renderer\" \"pnpm dev:artifacts:html-renderer\" \"pnpm dev:artifacts:material-ui-renderer\"",
+    "dev:all": "concurrently \"pnpm start:docker\" \"pnpm dev\" \"pnpm storybook --silent\" \"pnpm dev:artifacts:element-ui-plus-renderer --silent\" \"pnpm dev:artifacts:shadcn-ui-renderer --silent\" \"pnpm dev:artifacts:antd-renderer --silent\" \"pnpm dev:artifacts:html-renderer --silent\" \"pnpm dev:artifacts:material-ui-renderer --silent\"",
     "start:docker": "docker compose ps -q | grep -q . && echo 'Docker containers already running' || docker compose up -d",
     "stop:docker": "docker compose down",
     "stop:all": "pnpm stop:docker && pkill -f 'node'"
