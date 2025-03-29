@@ -145,27 +145,7 @@ pnpm storybook
 **6. Start Compoder**
 
 ```bash
-pnpm dev
-```
-
-**7. Start Code Rendering Sandbox (Artifacts)**
-
-```bash
-# Start Antd rendering sandbox
-cd artifacts/antd-renderer
-pnpm dev
-
-# Start Shadcn UI rendering sandbox
-cd artifacts/shadcn-ui-renderer
-pnpm dev
-
-# Start Mui rendering sandbox
-cd artifacts/mui-renderer
-pnpm dev
-
-# Start Element Plus rendering sandbox
-cd artifacts/element-plus-renderer
-pnpm dev
+pnpm dev:all
 ```
 
 More detailed usage documentation, please refer to [CONTRIBUTING.md](./CONTRIBUTING.md).

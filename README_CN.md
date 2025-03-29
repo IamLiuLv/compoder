@@ -145,27 +145,7 @@ pnpm storybook
 **6. 启动 Compoder**
 
 ```bash
-pnpm dev
-```
-
-**7. 启动代码渲染沙箱（Artifacts）**
-
-```bash
-# 启动 Antd 渲染沙箱
-cd artifacts/antd-renderer
-pnpm dev
-
-# 启动 Shadcn UI 渲染沙箱
-cd artifacts/shadcn-ui-renderer
-pnpm dev
-
-# 启动Mui 渲染沙箱
-cd artifacts/mui-renderer
-pnpm dev
-
-# 启动Element Plus 渲染沙箱
-cd artifacts/element-plus-renderer
-pnpm dev
+pnpm dev:all
 ```
 
 更多关于 Compoder 的详细使用文档，请参考 [CONTRIBUTING_CN.md](./CONTRIBUTING_CN.md)。
