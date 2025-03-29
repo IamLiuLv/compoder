@@ -19,7 +19,7 @@ import {
   useCodegenDetail,
   useComponentCodeList,
 } from "../server-store/selectors"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import {
   useCreateComponentCode,
   useDeleteComponentCode,
@@ -41,6 +41,24 @@ import {
   LLMSelectorButton,
 } from "@/app/commons/LLMSelectorProvider"
 
+// 添加类型定义
+interface ChatState {
+  value: string
+  images: string[]
+  isSubmitting: boolean
+  streamingContent: string
+  provider?: AIProvider
+  model?: string
+  showJumpPrompt: boolean
+  newComponentId?: string
+}
+
+interface FilterState {
+  currentPage: number
+  searchKeyword: string
+  filterField: "all" | "name" | "description"
+}
+
 export default function CodegenDetailPage({
   params,
 }: {
@@ -49,46 +67,78 @@ export default function CodegenDetailPage({
   const { data: codegenDetail, isLoading } = useCodegenDetail(params.codegenId)
   const router = useRouter()
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const [searchKeyword, setSearchKeyword] = useState("")
-  const [filterField, setFilterField] = useState<
-    "all" | "name" | "description"
-  >("all")
+  // 组合相关状态
+  const [filterState, setFilterState] = useState<FilterState>({
+    currentPage: 1,
+    searchKeyword: "",
+    filterField: "all",
+  })
 
-  const { data: componentCodeData, isLoading: isComponentLoading } =
+  const [chatState, setChatState] = useState<ChatState>({
+    value: "",
+    images: [],
+    isSubmitting: false,
+    streamingContent: "",
+    showJumpPrompt: false,
+  })
+
+  const [showCodeDetailDigLog, setShowCodeDetailDigLog] = useState(false)
+  const showcodeDetailRef = useRef(false)
+  const [showCodingBox, setShowCodingBox] = useState(false)
+
+  const { data: componentCodeData, isLoading: isComponentLoading, refetch: refetchComponentList } =
     useComponentCodeList({
       codegenId: params.codegenId,
-      page: currentPage,
+      page: filterState.currentPage,
       pageSize: 10,
-      searchKeyword,
-      filterField,
+      searchKeyword: filterState.searchKeyword,
+      filterField: filterState.filterField,
     })
 
-  const [chatValue, setChatValue] = useState("")
-  const [images, setImages] = useState<string[]>([])
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [streamingContent, setStreamingContent] = useState("")
-  const [provider, setProvider] = useState<AIProvider>()
-  const [model, setModel] = useState<string>()
   const createComponentMutation = useCreateComponentCode()
   const deleteComponentMutation = useDeleteComponentCode()
 
+  // 优化状态更新函数
+  const updateChatState = (updates: Partial<ChatState>) => {
+    setChatState(prev => ({ ...prev, ...updates }))
+  }
+
+  const updateFilterState = (updates: Partial<FilterState>) => {
+    setFilterState(prev => ({ ...prev, ...updates }))
+  }
+
+  const onCodeDetailChange = (val: boolean) => {
+    setShowCodeDetailDigLog(val)
+    showcodeDetailRef.current = val
+    if (!chatState.isSubmitting) {
+      setShowCodingBox(val)
+    }
+  }
+
   const shouldShowList = useShowOnFirstData(componentCodeData?.items)
 
-  // handle LLM change
   const handleLLMChange = (
     newProvider: AIProvider | undefined,
     newModel: string | undefined,
   ) => {
-    console.log(`Selected LLM: ${newProvider} - ${newModel}`)
-    setProvider(newProvider)
-    setModel(newModel)
+    updateChatState({ provider: newProvider, model: newModel })
+  }
+
+  // 提取错误处理逻辑
+  const handleError = (error: Error) => {
+    console.error("Operation failed:", error)
+    toast({
+      title: "Error",
+      description: error.message,
+      variant: "destructive",
+    })
   }
 
   const handleChatSubmit = async () => {
-    if (!chatValue.trim() && images.length === 0) return
+    if (!chatState.value.trim() && chatState.images.length === 0) return
+    setShowCodingBox(true)
 
-    if (!model || !provider) {
+    if (!chatState.model || !chatState.provider) {
       toast({
         title: "Error",
         description: "Please select a model and provider",
@@ -97,79 +147,83 @@ export default function CodegenDetailPage({
       return
     }
 
-    setIsSubmitting(true)
-    const prompts: Prompt[] = [
-      { text: chatValue, type: "text" },
-      ...images.map(
-        image =>
-          ({
-            image,
-            type: "image",
-          } as PromptImage),
-      ),
-    ]
-
-    // if model is selected, add it to the request parameters
-    const requestParams = {
-      prompt: prompts,
-      codegenId: params.codegenId,
-      model,
-      provider,
-    }
+    updateChatState({ isSubmitting: true })
 
     try {
-      const res = await createComponentMutation.mutateAsync(requestParams)
+      const prompts: Prompt[] = [
+        { text: chatState.value, type: "text" },
+        ...chatState.images.map(
+          image => ({ image, type: "image" } as PromptImage),
+        ),
+      ]
 
-      const reader = res?.getReader()
-      const decoder = new TextDecoder()
-      let content = ""
+      const res = await createComponentMutation.mutateAsync({
+        prompt: prompts,
+        codegenId: params.codegenId,
+        model: chatState.model,
+        provider: chatState.provider,
+      })
 
-      while (true) {
-        const { done, value } = await reader?.read()
-        if (done) break
-        content += decoder.decode(value)
-        setStreamingContent(content)
-      }
+      await handleStreamResponse(res)
+      
+      updateChatState({
+        value: "",
+        images: [],
+        isSubmitting: false,
+      })
+      
+      await refetchComponentList()
+    } catch (error) {
+      handleError(error as Error)
+    } finally {
+      updateChatState({ isSubmitting: false })
+    }
+  }
 
-      const errorMessage = transformTryCatchErrorFromXml(content)
-      if (errorMessage) {
-        toast({
-          title: "Error",
-          description: errorMessage,
-          variant: "destructive",
-        })
-        return
-      }
+  // 提取流响应处理逻辑
+  const handleStreamResponse = async (response: ReadableStream) => {
+    const reader = response?.getReader()
+    const decoder = new TextDecoder()
+    let content = ""
 
-      const componentId = transformNewComponentIdFromXml(content)
-      if (componentId) {
+    while (true) {
+      const { done, value } = await reader?.read()
+      if (done) break
+      content += decoder.decode(value)
+      updateChatState({ streamingContent: content })
+    }
+
+    const errorMessage = transformTryCatchErrorFromXml(content)
+    if (errorMessage) {
+      throw new Error(errorMessage)
+    }
+
+    const componentId = transformNewComponentIdFromXml(content)
+    if (componentId) {
+      updateChatState({ 
+        newComponentId: componentId,
+        showJumpPrompt: showcodeDetailRef.current 
+      })
+      
+      if (!showcodeDetailRef.current) {
         router.push(`/main/codegen/${params.codegenId}/${componentId}`)
       }
-
-      setChatValue("")
-      setImages([])
-    } catch (error) {
-      console.error("Failed to create component:", error)
-    } finally {
-      setIsSubmitting(false)
-      setStreamingContent("")
     }
   }
 
   const handleImageRemove = (index: number) => {
-    setImages(prev => prev.filter((_, i) => i !== index))
+    updateChatState({
+      images: chatState.images.filter((_, i) => i !== index)
+    })
   }
 
-  const handleDeleteComponent = (id: string) => {
-    deleteComponentMutation.mutate(
-      { id },
-      {
-        onSuccess: () => {
-          // Additional logic after successful deletion if needed
-          console.log("Component deleted successfully:", id)
-        },
-      },
-    )
+  const handleDeleteComponent = async (id: string) => {
+    try {
+      await deleteComponentMutation.mutateAsync({ id })
+      await refetchComponentList()
+    } catch (error) {
+      handleError(error as Error)
+    }
   }
 
   return (
@@ -196,7 +250,7 @@ export default function CodegenDetailPage({
                     codegenDetail?.prompts.map(prompt => ({
                       title: prompt.title,
                       onClick: () => {
-                        setChatValue(prompt.title)
+                        setChatState(prev => ({ ...prev, value: prompt.title }))
                       },
                     })) || []
                   }
@@ -205,8 +259,8 @@ export default function CodegenDetailPage({
 
                 <ChatInput
                   className="mt-6"
-                  value={chatValue}
-                  onChange={setChatValue}
+                  value={chatState.value}
+                  onChange={value => setChatState(prev => ({ ...prev, value }))}
                   onSubmit={handleChatSubmit}
                   actions={[
                     <TooltipProvider key="draw-image">
@@ -214,9 +268,9 @@ export default function CodegenDetailPage({
                         <TooltipTrigger asChild>
                           <Button variant="ghost" size="icon">
                             <TldrawEdit
-                              disabled={isSubmitting}
+                              disabled={chatState.isSubmitting}
                               onSubmit={imageData => {
-                                setImages(prev => [...prev, imageData])
+                                setChatState(prev => ({ ...prev, images: [...prev.images, imageData] }))
                               }}
                             />
                           </Button>
@@ -228,14 +282,14 @@ export default function CodegenDetailPage({
                     </TooltipProvider>,
                     <LLMSelectorButton key="llm-selector" />,
                   ]}
-                  images={images}
+                  images={chatState.images}
                   onImageRemove={handleImageRemove}
-                  loading={isSubmitting}
+                  loading={chatState.isSubmitting}
                   loadingSlot={
-                    isSubmitting ? (
+                    chatState.isSubmitting ? (
                       <CompoderThinkingLoading
                         text={
-                          streamingContent
+                          chatState.streamingContent
                             ? "Compoder is coding..."
                             : "Compoder is thinking..."
                         }
@@ -248,19 +302,19 @@ export default function CodegenDetailPage({
           </div>
           <div
             className={cn(
-              isSubmitting || shouldShowList ? "opacity-100" : "opacity-0",
+              chatState.isSubmitting || shouldShowList ? "opacity-100" : "opacity-0",
               "w-full mx-auto px-6",
             )}
           >
             <p className="text-lg font-bold mb-4">Component List</p>
             <ComponentCodeFilterContainer
               total={componentCodeData?.total || 0}
-              currentPage={currentPage}
-              searchKeyword={searchKeyword}
-              filterField={filterField}
-              onPageChange={setCurrentPage}
-              onSearchChange={setSearchKeyword}
-              onFilterFieldChange={setFilterField}
+              currentPage={filterState.currentPage}
+              searchKeyword={filterState.searchKeyword}
+              filterField={filterState.filterField}
+              onPageChange={page => updateFilterState({ currentPage: page })}
+              onSearchChange={keyword => updateFilterState({ searchKeyword: keyword })}
+              onFilterFieldChange={field => updateFilterState({ filterField: field })}
             >
               {isComponentLoading ? (
                 <div className="space-y-4">
@@ -271,13 +325,29 @@ export default function CodegenDetailPage({
               ) : (
                 <ComponentCodeList
                   newItem={
-                    isSubmitting ? (
-                      <CodingBox className="h-full" code={streamingContent} />
+                    chatState.streamingContent && showCodingBox ? (
+                      <CodingBox
+                        className="h-full"
+                        code={chatState.streamingContent}
+                        showJumpPrompt={chatState.showJumpPrompt}
+                        isSubmitting={chatState.isSubmitting}
+                        onJumpConfirm={() => {
+                          setChatState(prev => ({ ...prev, showJumpPrompt: false }))
+                          if (chatState.newComponentId) {
+                            router.push(`/main/codegen/${params.codegenId}/${chatState.newComponentId}`)
+                          }
+                        }}
+                        onJumpCancel={() => {
+                          setChatState(prev => ({ ...prev, showJumpPrompt: false }))
+                        }}
+                        showCodeDetail={showCodeDetailDigLog}
+                        setShowCodeDetail={onCodeDetailChange}
+                        newComponentId={chatState.newComponentId}
+                      />
                     ) : undefined
                   }
                   items={componentCodeData?.items ?? []}
                   codeRendererServer={codegenDetail?.codeRendererUrl || ""}
-                  // onEditClick={id => console.log("Edit clicked:", id)}
                   onDeleteClick={id => handleDeleteComponent(id)}
                   onItemClick={id =>
                     router.push(`/main/codegen/${params.codegenId}/${id}`)
