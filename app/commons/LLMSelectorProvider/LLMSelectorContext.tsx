@@ -1,3 +1,4 @@
+import { LLMOption } from "@/components/biz/LLMSelector"
 import { AIProvider } from "@/lib/config/ai-providers"
 import { createContext, useContext } from "react"
 
@@ -6,6 +7,8 @@ export interface LLMSelectorContextType {
   provider: AIProvider | undefined
   // 当前选择的模型ID
   model: string | undefined
+  // 当前选择的模型配置
+  modelConfig: LLMOption | undefined
   // 是否正在加载模型列表
   loading: boolean
   // 加载错误信息
@@ -22,6 +25,7 @@ export interface LLMSelectorContextType {
 export const LLMSelectorContext = createContext<LLMSelectorContextType>({
   provider: undefined,
   model: undefined,
+  modelConfig: undefined,
   loading: false,
   error: null,
   setProvider: () => {},

@@ -27,7 +27,7 @@ export function useComponentDetail() {
     codegenId: string
   }>()
   const [activeVersionId, setActiveVersion] = useState("")
-  const { provider, model } = useLLMSelectorContext()
+  const { provider, model, modelConfig } = useLLMSelectorContext()
   const initRef = useRef(false)
 
   const {
@@ -199,5 +199,6 @@ export function useComponentDetail() {
     artifact,
     codegenId,
     componentId,
+    modelConfig,
   }
 }

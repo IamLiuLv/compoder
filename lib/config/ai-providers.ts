@@ -9,6 +9,7 @@ export type AIModelConfig = {
   model: string
   title: string
   baseURL: string
+  features: Array<"vision">
   apiKey: string
 }
 

@@ -1,20 +1,10 @@
 import { useEffect, useState } from "react"
-import { AIProvider } from "@/lib/config/ai-providers"
+import { AIProvider, AIProviderConfig } from "@/lib/config/ai-providers"
 import { LLMOption } from "@/components/biz/LLMSelector/interface"
 
 // Define a new interface for API response which matches the return from the API
 interface ConfigApiResponse {
-  providers: Record<
-    AIProvider,
-    {
-      provider: AIProvider
-      models: Array<{
-        model: string
-        title: string
-        apiKey: string
-      }>
-    }
-  >
+  providers: Record<AIProvider, AIProviderConfig>
 }
 
 /**
@@ -51,6 +41,7 @@ export function useLLMOptions() {
                 provider,
                 modelId: model.model,
                 title: model.title,
+                features: model.features,
               })
             })
           },

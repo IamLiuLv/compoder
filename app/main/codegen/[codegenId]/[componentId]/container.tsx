@@ -35,7 +35,10 @@ export const ComponentDetailContainer = () => {
     handleSave,
     artifact,
     codegenId,
+    modelConfig,
   } = useComponentDetail()
+
+  const supportVision = modelConfig?.features.includes("vision")
 
   const loadingSlot = useMemo(() => {
     if (!isStreaming || !compoderThinkingProcess) return null
@@ -52,7 +55,7 @@ export const ComponentDetailContainer = () => {
     if (!codegenId) return
 
     const prompt: Prompt[] = [
-      ...(images.length > 0
+      ...(supportVision && images.length > 0
         ? images.map(image => ({ type: "image" as const, image }))
         : []),
       {
@@ -138,26 +141,28 @@ export const ComponentDetailContainer = () => {
         onChange={setChatInput}
         onSubmit={handleChatSubmit}
         actions={[
-          <TooltipProvider key="draw-image">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <TldrawEdit
-                    disabled={isStreaming}
-                    onSubmit={imageData => {
-                      setImages(prev => [...prev, imageData])
-                    }}
-                  />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Draw An Image</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>,
+          supportVision && (
+            <TooltipProvider key="draw-image">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <TldrawEdit
+                      disabled={isStreaming}
+                      onSubmit={imageData => {
+                        setImages(prev => [...prev, imageData])
+                      }}
+                    />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Draw An Image</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          ),
           <LLMSelectorButton key="llm-selector" />,
-        ]}
-        images={images}
+        ].filter(Boolean)}
+        images={supportVision ? images : []}
         onImageRemove={handleImageRemove}
         loading={isStreaming}
         loadingSlot={loadingSlot}

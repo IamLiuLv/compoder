@@ -19,7 +19,7 @@ import {
   useCodegenDetail,
   useComponentCodeList,
 } from "../server-store/selectors"
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import {
   useDeleteComponentCode,
   useCreateComponentCode,
@@ -40,6 +40,7 @@ import {
   LLMSelectorProvider,
   LLMSelectorButton,
 } from "@/app/commons/LLMSelectorProvider"
+import { useLLMOptions } from "@/app/commons/LLMSelectorProvider/useLLMOptions"
 
 export default function CodegenDetailPage({
   params,
@@ -69,6 +70,12 @@ export default function CodegenDetailPage({
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [provider, setProvider] = useState<AIProvider>()
   const [model, setModel] = useState<string>()
+  const { options } = useLLMOptions()
+  const modelConfig = useMemo(() => {
+    return options.find(opt => opt.modelId === model)
+  }, [model, options])
+  const supportVision = modelConfig?.features.includes("vision")
+  const createComponentMutation = useCreateComponentCode()
   const initComponentMutation = useCreateComponentCode()
   const deleteComponentMutation = useDeleteComponentCode()
 
@@ -99,13 +106,15 @@ export default function CodegenDetailPage({
     setIsSubmitting(true)
     const prompts: Prompt[] = [
       { text: chatValue, type: "text" },
-      ...images.map(
-        image =>
-          ({
-            image,
-            type: "image",
-          } as PromptImage),
-      ),
+      ...(supportVision && images.length > 0
+        ? images.map(
+            image =>
+              ({
+                image,
+                type: "image",
+              } as PromptImage),
+          )
+        : []),
     ]
 
     // if model is selected, add it to the request parameters
@@ -182,26 +191,28 @@ export default function CodegenDetailPage({
                   onChange={setChatValue}
                   onSubmit={handleChatSubmit}
                   actions={[
-                    <TooltipProvider key="draw-image">
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button variant="ghost" size="icon">
-                            <TldrawEdit
-                              disabled={isSubmitting}
-                              onSubmit={imageData => {
-                                setImages(prev => [...prev, imageData])
-                              }}
-                            />
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Draw An Image</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>,
+                    supportVision && (
+                      <TooltipProvider key="draw-image">
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                              <TldrawEdit
+                                disabled={isSubmitting}
+                                onSubmit={imageData => {
+                                  setImages(prev => [...prev, imageData])
+                                }}
+                              />
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Draw An Image</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    ),
                     <LLMSelectorButton key="llm-selector" />,
-                  ]}
-                  images={images}
+                  ].filter(Boolean)}
+                  images={supportVision ? images : []}
                   onImageRemove={handleImageRemove}
                   loading={isSubmitting}
                 />

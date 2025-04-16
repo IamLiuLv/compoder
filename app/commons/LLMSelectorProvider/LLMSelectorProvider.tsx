@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useMemo } from "react"
 import { AIProvider } from "@/lib/config/ai-providers"
 import { useLLMOptions } from "@/app/commons/LLMSelectorProvider/useLLMOptions"
 import { LLMSelectorContext } from "./LLMSelectorContext"
@@ -35,6 +35,9 @@ const LLMSelectorProvider: React.FC<LLMSelectorProviderProps> = ({
     defaultProvider,
   )
   const [model, setModelState] = useState<string | undefined>(defaultModel)
+  const modelConfig = useMemo(() => {
+    return options.find(opt => opt.modelId === model)
+  }, [model, options])
   const [isInitialized, setIsInitialized] = useState(false)
 
   // Load saved preferences from localStorage on component mount
@@ -172,6 +175,7 @@ const LLMSelectorProvider: React.FC<LLMSelectorProviderProps> = ({
   const contextValue = {
     provider,
     model,
+    modelConfig,
     loading,
     error,
     setProvider,

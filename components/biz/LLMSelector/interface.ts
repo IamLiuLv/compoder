@@ -4,6 +4,7 @@ export interface LLMOption {
   provider: AIProvider
   modelId: string
   title: string
+  features: Array<"vision">
 }
 
 export interface LLMSelectorProps {
