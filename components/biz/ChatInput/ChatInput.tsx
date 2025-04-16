@@ -189,7 +189,8 @@ const ChatInput = React.memo(
                   variant="default"
                   className={cn(
                     "bg-gradient-to-r from-indigo-500 to-purple-500 hover:opacity-80",
-                    loading && "animate-pulse cursor-not-allowed",
+                    loading &&
+                      "animate-pulse cursor-not-allowed pointer-events-none",
                   )}
                   disabled={disabled}
                   onClick={() => {
