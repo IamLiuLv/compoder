@@ -404,5 +404,40 @@
                 }
             }
         ]
+    },
+    {
+        "title": "Arco Design Codegen",
+        "description": "Code generator based on Vue3 and Arco Design",
+        "fullStack": "Vue",
+        "guides": [
+            "Generate a login page",
+            "Generate a Table component, include 3 columns: name, age, address"
+        ],
+        "model": "gpt-4o",
+        "codeRendererUrl": "http://localhost:3006",
+        "rules": [
+            {
+                "type": "styles",
+                "description": "Define the rules for generating styles",
+                "prompt": "Styles must be written using tailwindcss, and the component must be responsive."
+            },
+            {
+                "type": "public-components",
+                "description": "Define which public components to use",
+                "dataSet": [
+                    "@arco-design/web-vue"
+                ]
+            },
+            {
+                "type": "file-structure",
+                "description": "Define the file structure for the project",
+                "prompt": "Output component code in XML format as follows:\\n<ComponentArtifact name=\"ComponentName\">\\n  <ComponentFile fileName=\"App.vue\" isEntryFile=\"true\">\\n    import { ComponentName } from './ComponentName';\\n    \\n    const mockProps = {\\n      // Define mock data here\\n    };\\n    \\n    export default function App() {\\n      return <ComponentName {...mockProps} />;\\n    }\\n  </ComponentFile>\\n  \\n  <ComponentFile fileName=\"[ComponentName].vue\">\\n    // Main component implementation\\n    // Split into multiple files if exceeds 500 lines\\n    export const ComponentName = () => {\\n      // Component implementation\\n    }\\n  </ComponentFile>\\n\\n  <ComponentFile fileName=\"helpers.ts\">\\n    // Helper functions (optional)\\n  </ComponentFile>\\n\\n  <ComponentFile fileName=\"interface.ts\">\\n    // Type definitions for component props\\n    // All API-interacting data must be defined as props:\\n    // - initialData for component initialization\\n    // - onChange, onSave, onDelete etc. for data modifications\\n  </ComponentFile>\\n  </ComponentArtifact>"
+            },
+            {
+                "type": "attention-rules",
+                "description": "Attention rules for the code generator",
+                "prompt": "Components have been globally registered, use component names with 'a-' prefix directly in templates (e.g., <a-button>). No need to import @arco-design/web-vue components in each component file. If types or utility functions are needed in script section, use named imports, e.g.: import { type ButtonProps } from '@arco-design/web-vue'. Do not use default imports, namespace imports, or side effect imports. Only use vue and @arco-design/web-vue packages."
+            }
+        ]
     }
 ]
