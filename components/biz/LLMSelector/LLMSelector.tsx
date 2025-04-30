@@ -28,6 +28,7 @@ const LLMSelector: React.FC<LLMSelectorProps> = ({
       anthropic: [],
       deepseek: [],
       ollama: [],
+      google: []
     }
 
     initialData.forEach(option => {
