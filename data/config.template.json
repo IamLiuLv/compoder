@@ -75,6 +75,29 @@
                     "apiKey": ""
                 }
             ]
+        },
+        {
+            "provider": "google",
+            "models": [
+                {
+                    "model": "gemini-1.5-pro",
+                    "title": "Gemini 1.5 Pro (Google)",
+                    "baseURL": "https://generativelanguage.googleapis.com/v1beta",
+                    "apiKey": "YOUR_GOOGLE_API_KEY"
+                },
+                {
+                    "model": "gemini-1.0-pro",
+                    "title": "Gemini 1.0 Pro (Google)",
+                    "baseURL": "https://generativelanguage.googleapis.com/v1beta",
+                    "apiKey": "YOUR_GOOGLE_API_KEY"
+                },
+                {
+                    "model": "gemini-pro-vision",
+                    "title": "Gemini Pro Vision (Google)",
+                    "baseURL": "https://generativelanguage.googleapis.com/v1beta",
+                    "apiKey": "YOUR_GOOGLE_API_KEY"
+                }
+            ]
         }
     ]
 }

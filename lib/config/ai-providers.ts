@@ -2,7 +2,7 @@ import fs from "fs"
 import path from "path"
 
 // Define AI provider types
-export type AIProvider = "openai" | "anthropic" | "deepseek" | "ollama"
+export type AIProvider = "openai" | "anthropic" | "deepseek" | "ollama" | "google"
 
 // Model configuration
 export type AIModelConfig = {
