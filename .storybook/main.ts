@@ -13,7 +13,6 @@ const config = {
     "@storybook/addon-interactions",
     "@storybook/addon-themes",
     "@storybook/addon-coverage",
-    "@storybook/experimental-addon-test",
   ],
   framework: {
     name: "@storybook/nextjs",
