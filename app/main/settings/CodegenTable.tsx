@@ -179,8 +179,6 @@ export default function CodegenTable() {
             <TableHead>标题</TableHead>
             <TableHead>描述</TableHead>
             <TableHead>类型</TableHead>
-            <TableHead>指南数量</TableHead>
-            <TableHead>规则数量</TableHead>
             <TableHead>操作</TableHead>
           </TableRow>
         </TableHeader>
@@ -195,8 +193,6 @@ export default function CodegenTable() {
                 <TableCell>{item.title}</TableCell>
                 <TableCell>{item.description}</TableCell>
                 <TableCell>{item.fullStack}</TableCell>
-                <TableCell>{item.guides?.length || 0}</TableCell>
-                <TableCell>{item.rules?.length || 0}</TableCell>
                 <TableCell>
                   <Button size="sm" onClick={() => handleEdit(item)} className="mr-2">编辑</Button>
                   <Button size="sm" variant="destructive" onClick={() => openDeleteConfirm(item)}>删除</Button>

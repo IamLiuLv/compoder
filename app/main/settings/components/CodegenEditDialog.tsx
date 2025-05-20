@@ -46,7 +46,6 @@ export default function CodegenEditDialog({
     return !!(
       formData.title &&
       formData.description &&
-      formData.model &&
       formData.codeRendererUrl
     )
   }
@@ -152,7 +151,7 @@ export default function CodegenEditDialog({
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <p className="text-sm font-medium mb-1.5">模型 <span className="text-red-500">*</span></p>
+                      <p className="text-sm font-medium mb-1.5">推荐模型</p>
                       <Input
                         placeholder="例如: gpt-4-turbo"
                         value={formData.model || ""}
@@ -200,6 +199,12 @@ export default function CodegenEditDialog({
 
         {/* 固定底部 */}
         <DialogFooter className="flex-shrink-0 px-6 py-4 border-t bg-background flex items-center justify-between">
+          <Button
+            variant="outline"
+            onClick={() => onOpenChange(false)}
+          >
+            取消
+          </Button>
           <div className="flex gap-2">
             {activeTab !== "basic" && (
               <Button
