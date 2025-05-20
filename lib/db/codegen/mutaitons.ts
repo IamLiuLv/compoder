@@ -14,8 +14,7 @@ export async function upsertCodegen(codegen: Codegen) {
     )
     return result
   } else {
-    const result = await CodegenModel.
-    findOneAndUpdate(
+    const result = await CodegenModel.findOneAndUpdate(
       { title: codegen.title },
       codegen,
       { upsert: true, new: true },

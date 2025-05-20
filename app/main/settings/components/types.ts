@@ -4,7 +4,14 @@ export interface Rule {
   description: string
   prompt?: string
   dataSet?: string[]
-  docs?: Record<string, Record<string, { description: string; api: string }>>
+  docs?: {
+    [libraryName: string]: {
+      [componentName: string]: {
+        description: string;
+        api: string
+      }
+    }
+  }
 }
 
 // Codegen类型

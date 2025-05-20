@@ -4,9 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
-import { PlusCircle, Trash2, AlertCircle } from "lucide-react"
+import { PlusCircle, Trash2 } from "lucide-react"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { Rule } from "./types"
+import PrivateComponentsConfig from "./PrivateComponentsConfig"
 
 interface RulesConfigProps {
   rules: Rule[]
@@ -169,14 +170,11 @@ export default function RulesConfig({ rules = [], onChange }: RulesConfigProps) 
             </div>
           </div>
         ) : rule.type === "private-components" ? (
-          <Card className="bg-amber-50 border-amber-200">
-            <CardContent className="p-3 flex items-start gap-2">
-              <AlertCircle className="h-4 w-4 text-amber-700 mt-0.5" />
-              <p className="text-xs text-amber-700">
-                私有组件配置需要额外的配置，目前暂不支持在此界面编辑。请使用 API 进行配置。
-              </p>
-            </CardContent>
-          </Card>
+          <PrivateComponentsConfig
+            rule={rule}
+            index={index}
+            updateRule={updateRule}
+          />
         ) : null}
       </div>
     )
