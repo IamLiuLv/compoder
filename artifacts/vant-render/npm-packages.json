@@ -1,0 +1,74 @@
+{
+  "packages": [
+    {
+      "name": "@tailwindcss/browser",
+      "path": "@tailwindcss/browser@4.1.4/dist/index.global.min.js"
+    },
+    {
+      "name": "vue",
+      "path": "@vue/runtime-dom@3.2.0/dist/runtime-dom.esm-browser.js"
+    },
+    {
+      "name": "@vue/shared",
+      "path": "@vue/shared@3.2.0/dist/shared.esm-bundler.js"
+    },
+    {
+      "name": "vue-i18n",
+      "path": "vue-i18n@9.2.0-beta.36/dist/vue-i18n.esm-browser.js"
+    },
+    {
+      "name": "birpc",
+      "path": "birpc@2.3.0/dist/index.mjs"
+    },
+    {
+      "name": "hookable",
+      "path": "hookable@5.5.3/dist/index.mjs"
+    },
+    {
+      "name": "perfect-debounce",
+      "path": "perfect-debounce@1.0.0/dist/index.mjs"
+    },
+    {
+      "name": "@vue/devtools-shared",
+      "path": "@vue/devtools-shared@7.7.2/dist/index.min.js"
+    },
+    {
+      "name": "@vue/devtools-kit",
+      "path": "@vue/devtools-kit@7.7.2/dist/index.min.js"
+    },
+    {
+      "name": "@vue/devtools-api",
+      "path": "@vue/devtools-api@7.7.2/dist/index.js"
+    },
+    {
+      "name": "@vueuse/core",
+      "path": "@vueuse/core@9.6.0/index.mjs"
+    },
+    {
+      "name": "@vueuse/shared",
+      "path": "@vueuse/shared@9.6.0/index.mjs"
+    },
+    {
+      "name": "vue-demi",
+      "path": "vue-demi@0.13.11/lib/index.mjs"
+    },
+    {
+      "name": "vant",
+      "path": "vant@4.9.19/lib/vant.es.js"
+    },
+    {
+      "name": "@vant/use",
+      "path": "@vant/use@1.6.0/dist/index.esm.mjs"
+    },
+    {
+      "name": "@vant/popperjs",
+      "path": "@vant/popperjs@1.3.0/dist/index.esm.mjs"
+    }
+  ],
+  "css": [
+    {
+      "name": "vant-css",
+      "path": "vant@4.9.19/lib/index.css"
+    }
+  ]
+}
