@@ -75,6 +75,39 @@
                     "apiKey": ""
                 }
             ]
+        },
+        {
+          "provider": "openrouter",
+          "models": [
+            {
+              "model": "anthropic/claude-3.7-sonnet",
+              "title": "Claude 3.7 Sonnet",
+              "baseURL": "https://openrouter.ai/api/v1",
+              "features": ["vision"],
+              "apiKey": "sk-****"
+            },
+            {
+              "model": "anthropic/claude-3.5-sonnet",
+              "title": "Claude 3.5 Sonnet",
+              "baseURL": "https://openrouter.ai/api/v1",
+              "features": ["vision"],
+              "apiKey": "sk-****"
+            },
+            {
+              "model": "openai/gpt-4o",
+              "title": "GPT-4o",
+              "baseURL": "https://openrouter.ai/api/v1",
+              "features": ["vision"],
+              "apiKey": "sk-****"
+            },
+            {
+              "model": "mistralai/devstral-small:free",
+              "title": "Devstral-small(free)",
+              "baseURL": "https://openrouter.ai/api/v1",
+              "features": [""],
+              "apiKey": "sk-****"
+            }
+          ]
         }
     ]
 }
