@@ -152,7 +152,7 @@ export function useComponentDetail() {
         version => version._id.toString() === activeVersionId,
       )?.code || "",
     )
-  }, [activeVersionId])
+  }, [activeVersionId, componentDetail])
 
   useEffect(() => {
     if (!componentDetail || !provider || !model) return
