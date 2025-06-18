@@ -20,6 +20,7 @@ export interface CodegenRule {
 }
 
 export interface Codegen {
+  _id?: string  // MongoDB 文档ID，编辑时必需
   title: string
   description: string
   fullStack: "React" | "Vue"

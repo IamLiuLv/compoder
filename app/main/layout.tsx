@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useCallback } from "react"
+import React from "react"
 import { Loading } from "@/components/biz/Loading"
 import useRoutes from "@/hooks/use-routes"
 import { useSession, signOut } from "next-auth/react"
@@ -8,7 +8,6 @@ import { redirect } from "next/navigation"
 import { useEffect } from "react"
 import { AppSidebarLayout } from "@/components/biz/AppSidebarLayout"
 import {
-  useProviderModelModal,
   ProviderModelModalProvider,
 } from "@/app/commons/ProviderModelModal"
 import { type NavMainItem } from "@/components/biz/AppSidebarLayout/interface"
@@ -26,29 +25,12 @@ function MainLayoutContent({
   }
 }) {
   const routes = useRoutes()
-  const { openModal } = useProviderModelModal() // now it's safe to call
-
-  // handle nav item click
-  const handleNavItemClick = useCallback(
-    (url: string) => {
-      // if click is settings item
-      if (url === "/main/settings") {
-        openModal() // call method to open modal
-        return true // return true means handled, no need to navigate
-      }
-
-      // return false means not handled, need to navigate normally
-      return false
-    },
-    [openModal],
-  )
 
   return (
     <AppSidebarLayout
       navMain={routes as NavMainItem[]}
       user={user}
       onLogout={signOut}
-      onNavItemClick={handleNavItemClick}
     >
       {children}
     </AppSidebarLayout>
