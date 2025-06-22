@@ -6,12 +6,21 @@ export async function createCodegen(codegen: Codegen | Codegen[]) {
 }
 
 export async function upsertCodegen(codegen: Codegen) {
-  const result = await CodegenModel.findOneAndUpdate(
-    { title: codegen.title },
-    codegen,
-    { upsert: true, new: true },
-  )
-  return result
+  if (codegen._id) {
+    const result = await CodegenModel.findByIdAndUpdate(
+      codegen._id,
+      codegen,
+      { new: true },
+    )
+    return result
+  } else {
+    const result = await CodegenModel.findOneAndUpdate(
+      { title: codegen.title },
+      codegen,
+      { upsert: true, new: true },
+    )
+    return result
+  }
 }
 
 export async function upsertCodegens(codegens: Codegen[]) {
