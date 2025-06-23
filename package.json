@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "description": "AI-Powered Component Code Generator For Every Frontend Engineer",
+  "engines": {
+    "node": ">=22.7.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
