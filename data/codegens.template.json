@@ -440,32 +440,34 @@
             }
         ]
     },
-     {
-    "title": "Ant Design Vue Codegen",
-    "description": "Code generator based on Vue3 and Ant Design Vue",
-    "fullStack": "Vue",
-    "guides": [
-      "Generate a login page",
-      "Generate a Table component, include 3 columns: name, age, address"
-    ],
-    "model": "gpt-4o",
-    "codeRendererUrl": "http://localhost:3007",
-    "rules": [
-      {
-        "type": "public-components",
-        "description": "Define which public components to use",
-        "dataSet": ["ant-design-vue"]
-      },
-      {
-        "type": "file-structure",
-        "description": "Define the file structure for the project",
-        "prompt": "Output component code in XML format as follows: <ComponentArtifact name=\"ComponentName\"><ComponentFile fileName=\"App.vue\" isEntryFile=\"true\"><template>\n  <!-- Write template content here -->\n</template>\n\n<script>\n// Import required components and dependencies\nimport { ... } from '...'\n\nexport default {\n  name: 'ComponentName',\n  \n  components: {\n    // Register components\n  },\n\n  props: {\n    // Component properties\n    // IMPORTANT: Every prop MUST include a default value\n    propName: {\n      type: Type,\n      default: defaultValue,\n      required: false\n    }\n  },\n  \n  data() {\n    return {\n      // Component data\n    }\n  },\n  \n  computed: {\n    // Computed properties\n  },\n  \n  methods: {\n    // Methods\n  }\n}\n</script>\n\n<style scoped>\n/* Component styles */\n/* IMPORTANT: Do NOT use @apply in styles. Write CSS rules directly. */\n</style></ComponentFile></ComponentArtifact>\n\nIMPORTANT RULES:\n1. Every prop MUST include a default value\n2. Do NOT use @apply in styles. Write CSS rules directly."
-      },
-      {
-        "type": "attention-rules",
-        "description": "Attention rules for the code generator",
-        "prompt": "1. Use Vue 3 Composition API with <script setup> syntax\n2. Ant Design Vue components are globally registered - use them directly in templates with 'a-' prefix (e.g., <a-button>)\n3. For types or utilities, use named imports: import { type ButtonProps } from 'ant-design-vue'\n4. Every prop MUST include a default value\n5. Keep components focused on a single responsibility\n6. Use responsive design principles"
-      }
-    ]
-  }
+    {
+        "title": "Ant Design Vue Codegen",
+        "description": "Code generator based on Vue3 and Ant Design Vue",
+        "fullStack": "Vue",
+        "guides": [
+            "Generate a login page",
+            "Generate a Table component, include 3 columns: name, age, address"
+        ],
+        "model": "gpt-4o",
+        "codeRendererUrl": "http://localhost:3007",
+        "rules": [
+            {
+                "type": "public-components",
+                "description": "Define which public components to use",
+                "dataSet": [
+                    "ant-design-vue"
+                ]
+            },
+            {
+                "type": "file-structure",
+                "description": "Define the file structure for the project",
+                "prompt": "Output component code in XML format as follows: <ComponentArtifact name=\"ComponentName\"><ComponentFile fileName=\"App.vue\" isEntryFile=\"true\"><template>\n  <!-- Write template content here -->\n</template>\n\n<script>\n// Import required components and dependencies\nimport { ... } from '...'\n\nexport default {\n  name: 'ComponentName',\n  \n  components: {\n    // Register components\n  },\n\n  props: {\n    // Component properties\n    // IMPORTANT: Every prop MUST include a default value\n    propName: {\n      type: Type,\n      default: defaultValue,\n      required: false\n    }\n  },\n  \n  data() {\n    return {\n      // Component data\n    }\n  },\n  \n  computed: {\n    // Computed properties\n  },\n  \n  methods: {\n    // Methods\n  }\n}\n</script>\n\n<style scoped>\n/* Component styles */\n/* IMPORTANT: Do NOT use @apply in styles. Write CSS rules directly. */\n</style></ComponentFile></ComponentArtifact>\n\nIMPORTANT RULES:\n1. Every prop MUST include a default value\n2. Do NOT use @apply in styles. Write CSS rules directly."
+            },
+            {
+                "type": "attention-rules",
+                "description": "Attention rules for the code generator",
+                "prompt": "1. Use Vue 3 Composition API with <script setup> syntax\n2. Ant Design Vue components are globally registered - use them directly in templates with 'a-' prefix (e.g., <a-button>)\n3. For types or utilities, use named imports: import { type ButtonProps } from 'ant-design-vue'\n4. Every prop MUST include a default value\n5. Keep components focused on a single responsibility\n6. Use responsive design principles"
+            }
+        ]
+    }
 ]
