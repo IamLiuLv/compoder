@@ -118,7 +118,7 @@ export const buildSystemPrompt = (
 export const buildCurrentComponentMessage = (
   component: WorkflowContext["query"]["component"],
 ): Array<CoreMessage> => {
-  return component
+  return component && !component.isInitialized
     ? [
         {
           role: "user",

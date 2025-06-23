@@ -105,7 +105,7 @@ export default function CodegenDetailPage({
               ({
                 image,
                 type: "image",
-              } as PromptImage),
+              }) as PromptImage,
           )
         : []),
     ]

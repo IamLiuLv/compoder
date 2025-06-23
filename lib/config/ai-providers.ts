@@ -69,23 +69,26 @@ export function loadAIProvidersConfig(
     const config = JSON.parse(configFileContent) as AIProvidersConfig
 
     // Process the configuration - convert array to record for backward compatibility
-    const processedConfig = config.providers.reduce((acc, providerConfig) => {
-      const provider = providerConfig.provider
+    const processedConfig = config.providers.reduce(
+      (acc, providerConfig) => {
+        const provider = providerConfig.provider
 
-      // Process models - directly use the values from the config file
-      const processedModels = providerConfig.models.map(model => {
-        return {
-          ...model,
+        // Process models - directly use the values from the config file
+        const processedModels = providerConfig.models.map(model => {
+          return {
+            ...model,
+          }
+        })
+
+        acc[provider] = {
+          provider,
+          models: processedModels,
         }
-      })
 
-      acc[provider] = {
-        provider,
-        models: processedModels,
-      }
-
-      return acc
-    }, {} as Record<AIProvider, ProcessedAIProviderConfig>)
+        return acc
+      },
+      {} as Record<AIProvider, ProcessedAIProviderConfig>,
+    )
 
     // Update cache
     configCache = processedConfig

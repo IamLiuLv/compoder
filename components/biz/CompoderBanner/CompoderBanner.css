@@ -11,39 +11,46 @@
 
 @keyframes glitch {
   0% {
-    text-shadow: 0.05em 0 0 rgba(59, 130, 246, 0.75),
-                -0.05em -0.025em 0 rgba(139, 92, 246, 0.75),
-                -0.025em 0.05em 0 rgba(34, 211, 238, 0.75);
+    text-shadow:
+      0.05em 0 0 rgba(59, 130, 246, 0.75),
+      -0.05em -0.025em 0 rgba(139, 92, 246, 0.75),
+      -0.025em 0.05em 0 rgba(34, 211, 238, 0.75);
   }
   14% {
-    text-shadow: 0.05em 0 0 rgba(59, 130, 246, 0.75),
-                -0.05em -0.025em 0 rgba(139, 92, 246, 0.75),
-                -0.025em 0.05em 0 rgba(34, 211, 238, 0.75);
+    text-shadow:
+      0.05em 0 0 rgba(59, 130, 246, 0.75),
+      -0.05em -0.025em 0 rgba(139, 92, 246, 0.75),
+      -0.025em 0.05em 0 rgba(34, 211, 238, 0.75);
   }
   15% {
-    text-shadow: -0.05em -0.025em 0 rgba(59, 130, 246, 0.75),
-                0.025em 0.025em 0 rgba(139, 92, 246, 0.75),
-                -0.05em -0.05em 0 rgba(34, 211, 238, 0.75);
+    text-shadow:
+      -0.05em -0.025em 0 rgba(59, 130, 246, 0.75),
+      0.025em 0.025em 0 rgba(139, 92, 246, 0.75),
+      -0.05em -0.05em 0 rgba(34, 211, 238, 0.75);
   }
   49% {
-    text-shadow: -0.05em -0.025em 0 rgba(59, 130, 246, 0.75),
-                0.025em 0.025em 0 rgba(139, 92, 246, 0.75),
-                -0.05em -0.05em 0 rgba(34, 211, 238, 0.75);
+    text-shadow:
+      -0.05em -0.025em 0 rgba(59, 130, 246, 0.75),
+      0.025em 0.025em 0 rgba(139, 92, 246, 0.75),
+      -0.05em -0.05em 0 rgba(34, 211, 238, 0.75);
   }
   50% {
-    text-shadow: 0.025em 0.05em 0 rgba(59, 130, 246, 0.75),
-                0.05em 0 0 rgba(139, 92, 246, 0.75),
-                0 -0.05em 0 rgba(34, 211, 238, 0.75);
+    text-shadow:
+      0.025em 0.05em 0 rgba(59, 130, 246, 0.75),
+      0.05em 0 0 rgba(139, 92, 246, 0.75),
+      0 -0.05em 0 rgba(34, 211, 238, 0.75);
   }
   99% {
-    text-shadow: 0.025em 0.05em 0 rgba(59, 130, 246, 0.75),
-                0.05em 0 0 rgba(139, 92, 246, 0.75),
-                0 -0.05em 0 rgba(34, 211, 238, 0.75);
+    text-shadow:
+      0.025em 0.05em 0 rgba(59, 130, 246, 0.75),
+      0.05em 0 0 rgba(139, 92, 246, 0.75),
+      0 -0.05em 0 rgba(34, 211, 238, 0.75);
   }
   100% {
-    text-shadow: -0.025em 0 0 rgba(59, 130, 246, 0.75),
-                -0.025em -0.025em 0 rgba(139, 92, 246, 0.75),
-                -0.025em -0.05em 0 rgba(34, 211, 238, 0.75);
+    text-shadow:
+      -0.025em 0 0 rgba(59, 130, 246, 0.75),
+      -0.025em -0.025em 0 rgba(139, 92, 246, 0.75),
+      -0.025em -0.05em 0 rgba(34, 211, 238, 0.75);
   }
 }
 
@@ -69,8 +76,13 @@
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.2; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
 }
 
 @keyframes matrix-rain {
@@ -115,23 +127,45 @@
 }
 
 @keyframes glitch-1 {
-  0%, 100% { clip-path: inset(50% 0 35% 0); }
-  20% { clip-path: inset(15% 0 15% 0); }
-  40% { clip-path: inset(40% 0 43% 0); }
-  60% { clip-path: inset(25% 0 12% 0); }
-  80% { clip-path: inset(50% 0 35% 0); }
+  0%,
+  100% {
+    clip-path: inset(50% 0 35% 0);
+  }
+  20% {
+    clip-path: inset(15% 0 15% 0);
+  }
+  40% {
+    clip-path: inset(40% 0 43% 0);
+  }
+  60% {
+    clip-path: inset(25% 0 12% 0);
+  }
+  80% {
+    clip-path: inset(50% 0 35% 0);
+  }
 }
 
 @keyframes glitch-2 {
-  0%, 100% { clip-path: inset(25% 0 50% 0); }
-  20% { clip-path: inset(25% 0 20% 0); }
-  40% { clip-path: inset(50% 0 30% 0); }
-  60% { clip-path: inset(30% 0 35% 0); }
-  80% { clip-path: inset(75% 0 5% 0); }
+  0%,
+  100% {
+    clip-path: inset(25% 0 50% 0);
+  }
+  20% {
+    clip-path: inset(25% 0 20% 0);
+  }
+  40% {
+    clip-path: inset(50% 0 30% 0);
+  }
+  60% {
+    clip-path: inset(30% 0 35% 0);
+  }
+  80% {
+    clip-path: inset(75% 0 5% 0);
+  }
 }
 
 .cyber-grid {
-  background-image: 
+  background-image:
     linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(139, 92, 246, 0.1) 1px, transparent 1px);
   background-size: 20px 20px;
@@ -144,7 +178,7 @@
 }
 
 .cyber-badge::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   left: -50%;
@@ -172,31 +206,58 @@
 
 /* 添加更多蓝紫色调的动画效果 */
 @keyframes neon-pulse {
-  0%, 100% {
-    box-shadow: 0 0 5px #3b82f6, 0 0 10px #3b82f6, 0 0 15px #3b82f6, 0 0 20px #3b82f6;
+  0%,
+  100% {
+    box-shadow:
+      0 0 5px #3b82f6,
+      0 0 10px #3b82f6,
+      0 0 15px #3b82f6,
+      0 0 20px #3b82f6;
   }
   50% {
-    box-shadow: 0 0 10px #8b5cf6, 0 0 20px #8b5cf6, 0 0 30px #8b5cf6, 0 0 40px #8b5cf6;
+    box-shadow:
+      0 0 10px #8b5cf6,
+      0 0 20px #8b5cf6,
+      0 0 30px #8b5cf6,
+      0 0 40px #8b5cf6;
   }
 }
 
 @keyframes cyber-flicker {
-  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+  0%,
+  19.999%,
+  22%,
+  62.999%,
+  64%,
+  64.999%,
+  70%,
+  100% {
     opacity: 0.99;
   }
-  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+  20%,
+  21.999%,
+  63%,
+  63.999%,
+  65%,
+  69.999% {
     opacity: 0.4;
   }
 }
 
 .neon-blue-text {
   color: #00ffff;
-  text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff;
+  text-shadow:
+    0 0 5px #00ffff,
+    0 0 10px #00ffff,
+    0 0 15px #00ffff;
 }
 
 .neon-purple-text {
   color: #8b5cf6;
-  text-shadow: 0 0 5px #8b5cf6, 0 0 10px #8b5cf6, 0 0 15px #8b5cf6;
+  text-shadow:
+    0 0 5px #8b5cf6,
+    0 0 10px #8b5cf6,
+    0 0 15px #8b5cf6;
 }
 
 .blue-purple-gradient-text {
@@ -204,4 +265,4 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-} 
+}

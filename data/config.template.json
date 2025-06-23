@@ -1,80 +1,80 @@
 {
-    "providers": [
+  "providers": [
+    {
+      "provider": "openai",
+      "models": [
         {
-            "provider": "openai",
-            "models": [
-                {
-                    "model": "anthropic/claude-3.7-sonnet",
-                    "title": "Claude 3.7 Sonnet (OpenRouter)",
-                    "baseURL": "https://openrouter.ai/api/v1",
-                    "features": ["vision"],
-                    "apiKey": "sk-****"
-                },
-                {
-                    "model": "anthropic/claude-3.5-sonnet",
-                    "title": "Claude 3.5 Sonnet (OpenRouter)",
-                    "baseURL": "https://openrouter.ai/api/v1",
-                    "features": ["vision"],
-                    "apiKey": "sk-****"
-                },
-                {
-                    "model": "openai/gpt-4o",
-                    "title": "GPT-4o (OpenRouter)",
-                    "baseURL": "https://openrouter.ai/api/v1",
-                    "features": ["vision"],
-                    "apiKey": "sk-****"
-                },
-                {
-                    "model": "gpt-4o",
-                    "title": "GPT-4o (302)",
-                    "baseURL": "https://api.302.ai/v1",
-                    "features": ["vision"],
-                    "apiKey": "sk-****"
-                }
-            ]
+          "model": "anthropic/claude-3.7-sonnet",
+          "title": "Claude 3.7 Sonnet (OpenRouter)",
+          "baseURL": "https://openrouter.ai/api/v1",
+          "features": ["vision"],
+          "apiKey": "sk-****"
         },
         {
-            "provider": "anthropic",
-            "models": [
-                {
-                    "model": "claude-3-7-sonnet-latest",
-                    "title": "Claude 3.7 Sonnet (302)",
-                    "baseURL": "https://api.302.ai/v1",
-                    "features": ["vision"],
-                    "apiKey": "sk-****"
-                },
-                {
-                    "model": "claude-3-5-sonnet-latest",
-                    "title": "Claude 3.5 Sonnet (302)",
-                    "baseURL": "https://api.302.ai/v1",
-                    "features": ["vision"],
-                    "apiKey": "sk-****"
-                }
-            ]
+          "model": "anthropic/claude-3.5-sonnet",
+          "title": "Claude 3.5 Sonnet (OpenRouter)",
+          "baseURL": "https://openrouter.ai/api/v1",
+          "features": ["vision"],
+          "apiKey": "sk-****"
         },
         {
-            "provider": "deepseek",
-            "models": [
-                {
-                    "model": "deepseek-chat",
-                    "title": "DeepSeek-V3 Chat (DeepSeek)",
-                    "baseURL": "https://api.deepseek.com/v1",
-                    "features": [],
-                    "apiKey": "sk-****"
-                }
-            ]
+          "model": "openai/gpt-4o",
+          "title": "GPT-4o (OpenRouter)",
+          "baseURL": "https://openrouter.ai/api/v1",
+          "features": ["vision"],
+          "apiKey": "sk-****"
         },
         {
-            "provider": "ollama",
-            "models": [
-                {
-                    "model": "qwen2.5:14b",
-                    "title": "qwen2.5 (Ollama)",
-                    "baseURL": "http://localhost:11434/api",
-                    "features": ["vision"],
-                    "apiKey": ""
-                }
-            ]
+          "model": "gpt-4o",
+          "title": "GPT-4o (302)",
+          "baseURL": "https://api.302.ai/v1",
+          "features": ["vision"],
+          "apiKey": "sk-****"
         }
-    ]
+      ]
+    },
+    {
+      "provider": "anthropic",
+      "models": [
+        {
+          "model": "claude-3-7-sonnet-latest",
+          "title": "Claude 3.7 Sonnet (302)",
+          "baseURL": "https://api.302.ai/v1",
+          "features": ["vision"],
+          "apiKey": "sk-****"
+        },
+        {
+          "model": "claude-3-5-sonnet-latest",
+          "title": "Claude 3.5 Sonnet (302)",
+          "baseURL": "https://api.302.ai/v1",
+          "features": ["vision"],
+          "apiKey": "sk-****"
+        }
+      ]
+    },
+    {
+      "provider": "deepseek",
+      "models": [
+        {
+          "model": "deepseek-chat",
+          "title": "DeepSeek-V3 Chat (DeepSeek)",
+          "baseURL": "https://api.deepseek.com/v1",
+          "features": [],
+          "apiKey": "sk-****"
+        }
+      ]
+    },
+    {
+      "provider": "ollama",
+      "models": [
+        {
+          "model": "qwen2.5:14b",
+          "title": "qwen2.5 (Ollama)",
+          "baseURL": "http://localhost:11434/api",
+          "features": ["vision"],
+          "apiKey": ""
+        }
+      ]
+    }
+  ]
 }

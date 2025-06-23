@@ -1,9 +1,5 @@
 {
-    "version": 1,
-    "include": [
-        "/*"
-    ],
-    "exclude": [
-        "/assets/*"
-    ]
+  "version": 1,
+  "include": ["/*"],
+  "exclude": ["/assets/*"]
 }

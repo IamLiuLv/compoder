@@ -15,7 +15,10 @@
     "migrate-codegen": "tsx lib/db/codegen/migrate.ts",
     "build:docker": "docker build -t compoder:latest .",
     "build:artifacts-docker": "bash script/build-artifacts-docker.sh",
-    "postinstall": "playwright install chromium"
+    "postinstall": "playwright install chromium",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "format:staged": "prettier --write"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^1.1.17",
@@ -67,7 +70,6 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.9.0",
-    "@storybook/experimental-addon-test": "^8.6.12",
     "@storybook/addon-essentials": "^8.3.6",
     "@storybook/addon-interactions": "^8.3.6",
     "@storybook/addon-links": "^8.3.6",
@@ -79,6 +81,7 @@
     "@storybook/api": "^7.6.17",
     "@storybook/blocks": "^8.3.6",
     "@storybook/core-events": "^8.4.6",
+    "@storybook/experimental-addon-test": "^8.6.12",
     "@storybook/nextjs": "^8.3.6",
     "@storybook/preview-api": "^8.4.6",
     "@storybook/react": "^8.3.6",
@@ -102,13 +105,14 @@
     "eslint-config-next": "14.2.16",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "playwright": "^1.51.1",
     "postcss": "^8",
+    "prettier": "^3.5.3",
     "storybook": "^8.3.6",
     "tailwindcss": "^3.4.1",
     "ts-jest": "^29.3.1",
     "ts-node": "^10.9.2",
     "tsx": "^4.15.7",
-    "typescript": "^5",
-    "playwright": "^1.51.1"
+    "typescript": "^5"
   }
 }

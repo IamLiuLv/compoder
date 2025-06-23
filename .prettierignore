@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+build
+dist
+coverage
+.nyc_output
+*.log
+.env*
+pnpm-lock.yaml
+components/ui
+artifacts/shadcn-ui-renderer/components/ui

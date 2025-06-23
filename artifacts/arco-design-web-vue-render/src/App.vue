@@ -5,67 +5,64 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { Repl, useStore, Sandbox } from "@vue/repl";
-import { defaultSrcFiles, importsMap, mainFile } from "./helper";
+import { ref, onMounted } from "vue"
+import { Repl, useStore, Sandbox } from "@vue/repl"
+import { defaultSrcFiles, importsMap, mainFile } from "./helper"
 
-const key = ref(0);
-const replRef = ref<InstanceType<typeof Repl>>();
-
+const key = ref(0)
+const replRef = ref<InstanceType<typeof Repl>>()
 
 const store = useStore({
   builtinImportMap: ref(importsMap),
 })
-
 
 const handleSuccess = () => {
   window.parent.postMessage(
     {
       type: "artifacts-success",
     },
-    "*"
-  );
-};
+    "*",
+  )
+}
 
 const handleMessage = (event: any) => {
-  const { type, data } = event.data;
+  const { type, data } = event.data
   if (type === "artifacts") {
     store.setFiles(Object.assign(defaultSrcFiles, data.files), mainFile)
 
-    key.value += 1; // Update the key to force remount
+    key.value += 1 // Update the key to force remount
   }
-};
-
+}
 
 onMounted(() => {
-  window.addEventListener("message", handleMessage);
-  window.parent.postMessage("IFRAME_LOADED", "*");
+  window.addEventListener("message", handleMessage)
+  window.parent.postMessage("IFRAME_LOADED", "*")
 
   // 创建 MutationObserver 实例来监听 DOM 变化
-  const observer = new MutationObserver((mutations) => {
+  const observer = new MutationObserver(mutations => {
     // 检查是否有错误消息元素
-    const errorNodes = document.querySelectorAll(".msg.err");
+    const errorNodes = document.querySelectorAll(".msg.err")
     if (errorNodes.length > 0) {
       // 获取错误信息
-      const errorMessages = Array.from(errorNodes).map(node => node.textContent).join('\n');
+      const errorMessages = Array.from(errorNodes)
+        .map(node => node.textContent)
+        .join("\n")
       // 通知父窗口错误信息
       window.parent.postMessage(
         {
           type: "artifacts-error",
-          errorMessage: errorMessages
+          errorMessage: errorMessages,
         },
-        "*"
-      );
+        "*",
+      )
     }
-  });
+  })
 
   // 配置观察选项
-  const config = { childList: true, subtree: true };
+  const config = { childList: true, subtree: true }
   // 开始观察整个文档
-  observer.observe(document.body, config);
-});
-
-
+  observer.observe(document.body, config)
+})
 </script>
 
 <style scoped lang="less">

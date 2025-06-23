@@ -1,3 +1,3 @@
 export interface ErrorDisplayProps {
-  errorMessage?: string | null;
+  errorMessage?: string | null
 }

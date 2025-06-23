@@ -26,10 +26,11 @@ export default {
 
 // Basic template
 const Template: StoryFn<typeof ChatInput> = args => {
-  const [value, setValue] = useState("")
+  const { value: defaultValue, ...rest } = args
+  const [value, setValue] = useState(defaultValue || "")
   return (
     <ChatInput
-      {...args}
+      {...rest}
       value={value}
       onChange={val => {
         console.log("val", val)

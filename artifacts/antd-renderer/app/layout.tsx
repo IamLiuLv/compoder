@@ -16,7 +16,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <Script src="tailwind.3.4.5.js?v=5" strategy="beforeInteractive" />
+        {/* Tailwind CDN */}
+        <script src="https://cdn.tailwindcss.com"></script>
       </head>
       <body>
         <AntdRegistry>{children}</AntdRegistry>
