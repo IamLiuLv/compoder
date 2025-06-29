@@ -173,8 +173,8 @@ export const CompoderBanner: React.FC<CompoderBannerProps> = ({
             colorTheme === "purple"
               ? `url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext y='15' font-family='monospace' fill='%238b5cf6'%3E0%3C/text%3E%3Ctext x='10' y='15' font-family='monospace' fill='%23a78bfa'%3E1%3C/text%3E%3C/svg%3E")`
               : colorTheme === "blue"
-              ? `url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext y='15' font-family='monospace' fill='%233b82f6'%3E0%3C/text%3E%3Ctext x='10' y='15' font-family='monospace' fill='%2300ffff'%3E1%3C/text%3E%3C/svg%3E")`
-              : `url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext y='15' font-family='monospace' fill='%233b82f6'%3E0%3C/text%3E%3Ctext x='10' y='15' font-family='monospace' fill='%238b5cf6'%3E1%3C/text%3E%3C/svg%3E")`,
+                ? `url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext y='15' font-family='monospace' fill='%233b82f6'%3E0%3C/text%3E%3Ctext x='10' y='15' font-family='monospace' fill='%2300ffff'%3E1%3C/text%3E%3C/svg%3E")`
+                : `url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext y='15' font-family='monospace' fill='%233b82f6'%3E0%3C/text%3E%3Ctext x='10' y='15' font-family='monospace' fill='%238b5cf6'%3E1%3C/text%3E%3C/svg%3E")`,
         }}
       ></div>
 
@@ -187,8 +187,8 @@ export const CompoderBanner: React.FC<CompoderBannerProps> = ({
               colorTheme === "purple"
                 ? "linear-gradient(to bottom right, rgba(139, 92, 246, 0.1), transparent, rgba(167, 139, 250, 0.1))"
                 : colorTheme === "blue"
-                ? "linear-gradient(to bottom right, rgba(59, 130, 246, 0.1), transparent, rgba(0, 255, 255, 0.1))"
-                : "linear-gradient(to bottom right, rgba(59, 130, 246, 0.1), transparent, rgba(139, 92, 246, 0.1))",
+                  ? "linear-gradient(to bottom right, rgba(59, 130, 246, 0.1), transparent, rgba(0, 255, 255, 0.1))"
+                  : "linear-gradient(to bottom right, rgba(59, 130, 246, 0.1), transparent, rgba(139, 92, 246, 0.1))",
           }}
         />
       </div>
@@ -202,8 +202,8 @@ export const CompoderBanner: React.FC<CompoderBannerProps> = ({
               colorTheme === "purple"
                 ? "139, 92, 246"
                 : colorTheme === "blue"
-                ? "59, 130, 246"
-                : "34, 211, 238"
+                  ? "59, 130, 246"
+                  : "34, 211, 238"
             }, ${currentEffect.scanlineOpacity}) 50%, transparent)`,
             backgroundSize: "100% 4px",
             animation: "scanline 8s linear infinite",
@@ -244,8 +244,8 @@ export const CompoderBanner: React.FC<CompoderBannerProps> = ({
             cyberpunkLevel === "high"
               ? 25
               : cyberpunkLevel === "medium"
-              ? 15
-              : 8,
+                ? 15
+                : 8,
         }).map((_, i) => (
           <div
             key={i}
@@ -277,11 +277,11 @@ export const CompoderBanner: React.FC<CompoderBannerProps> = ({
               linear-gradient(90deg, rgba(167, 139, 250, 0.1) 1px, transparent 1px)
             `
               : colorTheme === "blue"
-              ? `
+                ? `
               linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
               linear-gradient(90deg, rgba(34, 211, 238, 0.1) 1px, transparent 1px)
             `
-              : `
+                : `
               linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
               linear-gradient(90deg, rgba(139, 92, 246, 0.1) 1px, transparent 1px)
             `,
@@ -331,8 +331,8 @@ export const CompoderBanner: React.FC<CompoderBannerProps> = ({
                 ? colorTheme === "purple"
                   ? "neon-purple-text"
                   : colorTheme === "blue"
-                  ? "neon-blue-text"
-                  : ""
+                    ? "neon-blue-text"
+                    : ""
                 : ""
             } text-lg sm:text-xl font-medium text-foreground/90 mb-3 sm:mb-4`}
           >
@@ -386,8 +386,8 @@ export const CompoderBanner: React.FC<CompoderBannerProps> = ({
                   ? colorTheme === "purple"
                     ? "neon-purple-text"
                     : colorTheme === "blue"
-                    ? "neon-blue-text"
-                    : ""
+                      ? "neon-blue-text"
+                      : ""
                   : ""
               }`}
               style={{ color: themeColors.highlight }}

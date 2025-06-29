@@ -8,11 +8,11 @@ export const customRequire = (moduleName: string) => {
     "@ant-design/pro-components": require("@ant-design/pro-components"),
     "@ant-design/use-emotion-css": require("@ant-design/use-emotion-css"),
     "styled-components": require("styled-components"),
-  };
-
-  if (modules[moduleName]) {
-    return modules[moduleName];
   }
 
-  throw new Error(`Module ${moduleName} not found`);
-};
+  if (modules[moduleName]) {
+    return modules[moduleName]
+  }
+
+  throw new Error(`Module ${moduleName} not found`)
+}

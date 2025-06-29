@@ -112,8 +112,8 @@
     >
       * Please try clicking "
       <span :style="{ fontWeight: 'bold' }">EXECUTE AUTO FIX</span>
-      " in the bottom right corner to fix the issue. If you think this is
-      a bug, please
+      " in the bottom right corner to fix the issue. If you think this is a bug,
+      please
       <a
         href="https://github.com/IamLiuLv/compoder/issues"
         target="_blank"
@@ -127,34 +127,34 @@
 </template>
 
 <script>
-import { defineComponent, ref, computed, onMounted } from 'vue'
+import { defineComponent, ref, computed, onMounted } from "vue"
 
 export default defineComponent({
-  name: 'ErrorDisplay',
+  name: "ErrorDisplay",
   props: {
     errorMessage: {
       type: String,
-      default: null
-    }
+      default: null,
+    },
   },
   setup(props) {
     const visible = ref(false)
-    
+
     const errorLines = computed(() => {
       if (!props.errorMessage) return []
-      return props.errorMessage.split('\n')
+      return props.errorMessage.split("\n")
     })
-    
+
     onMounted(() => {
       setTimeout(() => {
         visible.value = true
       }, 100)
     })
-    
+
     return {
       visible,
-      errorLines
+      errorLines,
     }
-  }
+  },
 })
-</script> 
+</script>

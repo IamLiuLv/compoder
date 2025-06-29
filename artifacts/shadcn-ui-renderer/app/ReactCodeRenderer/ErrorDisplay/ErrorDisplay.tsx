@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import type { ErrorDisplayProps } from "./interface";
+import React, { useEffect, useState } from "react"
+import type { ErrorDisplayProps } from "./interface"
 
 const ErrorDisplay: React.FC<ErrorDisplayProps> = ({ errorMessage }) => {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    setTimeout(() => setVisible(true), 100);
-  }, []);
+    setTimeout(() => setVisible(true), 100)
+  }, [])
 
   return (
     <div
@@ -134,7 +134,7 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({ errorMessage }) => {
         </a>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ErrorDisplay;
+export default ErrorDisplay

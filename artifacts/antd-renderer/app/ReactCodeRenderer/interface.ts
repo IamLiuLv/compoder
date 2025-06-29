@@ -1,17 +1,17 @@
 export interface DynamicComponentRendererProps {
-  files: { [key: string]: string };
-  entryFile: string;
-  customRequire: (importPath: string) => any;
-  onError: (errorMessage: string) => void;
-  onSuccess: () => void;
+  files: { [key: string]: string }
+  entryFile: string
+  customRequire: (importPath: string) => any
+  onError: (errorMessage: string) => void
+  onSuccess: () => void
 }
 
 export interface ModuleCache {
   [key: string]: {
-    exports: any;
-  };
+    exports: any
+  }
 }
 
 export interface ExportsObject {
-  [key: string]: any;
+  [key: string]: any
 }

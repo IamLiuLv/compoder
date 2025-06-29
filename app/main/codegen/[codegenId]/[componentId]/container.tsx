@@ -179,19 +179,22 @@ const CodeRenderer = ({
   const { files } = useFile()
   const codes = useMemo(
     () =>
-      files.reduce((acc, file) => {
-        if (file.content) {
-          acc[file.name] = file.content
-        }
-        if (file.children) {
-          file.children.forEach(child => {
-            if (child.content) {
-              acc[child.name] = child.content
-            }
-          })
-        }
-        return acc
-      }, {} as Record<string, string>),
+      files.reduce(
+        (acc, file) => {
+          if (file.content) {
+            acc[file.name] = file.content
+          }
+          if (file.children) {
+            file.children.forEach(child => {
+              if (child.content) {
+                acc[child.name] = child.content
+              }
+            })
+          }
+          return acc
+        },
+        {} as Record<string, string>,
+      ),
     [files],
   )
   const entryFile = files.find(file => file.isEntryFile)?.name || "App.tsx"

@@ -44,15 +44,15 @@ export const ResizableFrame: React.FC<ResizableFrameProps> = ({
       typeof width === "string" && width.includes("%")
         ? 800
         : typeof width === "number"
-        ? width
-        : parseInt(width) || 800
+          ? width
+          : parseInt(width) || 800
 
     const newHeight =
       typeof height === "string" && height.includes("%")
         ? 600
         : typeof height === "number"
-        ? height
-        : parseInt(height) || 600
+          ? height
+          : parseInt(height) || 600
 
     setDimensions({ width: newWidth, height: newHeight })
   }, [width, height])
