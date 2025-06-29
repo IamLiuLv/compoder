@@ -28,6 +28,7 @@ const LLMSelector: React.FC<LLMSelectorProps> = ({
       anthropic: [],
       deepseek: [],
       ollama: [],
+      openrouter: [],
     }
 
     initialData.forEach(option => {
