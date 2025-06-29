@@ -461,5 +461,236 @@
         "prompt": "Components have been globally registered, use component names with 'van-' prefix directly in templates (e.g., <van-button>). No need to import vant components in each component file. If types or utility functions are needed in script section, use named imports, e.g.: import { type ButtonProps } from 'vant'. Do not use default imports, namespace imports, or side effect imports. Only use vue and vant packages. Use vant@4+ as the version of vant. All design components must for mobile web apps. All code must be written in Vue3 syntax."
       }
     ]
+  },
+  {
+    "title": "HeroUI(NextUI) Codegen",
+    "description": "Code generator based on React and HeroUI",
+    "fullStack": "React",
+    "guides": [
+        "Generate a login page",
+        "Generate a Table component, include 3 columns: name, age, address"
+    ],
+    "model": "gpt-4o",
+    "codeRendererUrl": "http://localhost:3007",
+    "rules": [
+        {
+            "type": "styles",
+            "description": "Define the rules for generating styles",
+            "prompt": "Styles must be written using tailwindcss."
+        },
+        {
+            "type": "attention-rules",
+            "description": "Attention rules for the code generator",
+            "prompt": "Only use the following npm packages in the generated code: react, react-dom, @heroui/react lucide-react. Do not import or use any other packages. When importing from '@heroui/react', ONLY use named imports like: import { Button } from '@heroui/react'; - DO NOT use default imports, namespace imports, or side effect imports for these packages. <Divider /> component cannot set children prop."
+        },
+        {
+            "type": "private-components",
+            "description": "Define which private components to use",
+            "docs": {
+                "@heroui/react": {
+                    "Accordion": {
+                        "description": "Accordion display a list of high-level options that can expand/collapse to reveal more information.",
+                        "api": "reference: https://www.heroui.com/docs/components/accordion"
+                    },
+                    "Autocomplete": {
+                        "description": "An autocomplete combines a text input with a listbox, allowing users to filter a list of options to items matching a query.",
+                        "api": "reference: https://www.heroui.com/docs/components/autocomplete"
+                    },
+                    "Alert": {
+                        "description": "Alerts are temporary notifications that provide concise feedback about an action or event.",
+                        "api": "reference: https://www.heroui.com/docs/components/alert"
+                    },
+                    "Avatar": {
+                        "description": "The Avatar component is used to represent a user, and displays the profile picture, initials or fallback icon.",
+                        "api": "reference: https://www.heroui.com/docs/components/avatar"
+                    },
+                    "Badge": {
+                        "description": "Badges are used as a small numerical value or status descriptor for UI elements.",
+                        "api": "reference: https://www.heroui.com/docs/components/badge"
+                    },
+                    "Breadcrumbs": {
+                        "description": "Breadcrumbs display a hierarchy of links to the current page or resource in an application.",
+                        "api": "reference: https://www.heroui.com/docs/components/breadcrumbs"
+                    },
+                    "Button": {
+                        "description": "Buttons allow users to perform actions and make choices with a single tap.",
+                        "api": "reference: https://www.heroui.com/docs/components/button"
+                    },
+                    "Calendar": {
+                        "description": "A calendar consists of a grouping element containing one or more date grids (e.g. months), and a previous and next button for navigating between date ranges. Each calendar grid consists of cells containing button elements that can be pressed and navigated to using the arrow keys to select a date.",
+                        "api": "reference: https://www.heroui.com/docs/components/calendar"
+                    },
+                    "Card": {
+                        "description": "Card is a container for text, photos, and actions in the context of a single subject.",
+                        "api": "reference: https://www.heroui.com/docs/components/card"
+                    },
+                    "Checkbox": {
+                        "description": "Checkboxes allow users to select multiple items from a list of individual items, or to mark one individual item as selected.",
+                        "api": "reference: https://www.heroui.com/docs/components/checkbox"
+                    },
+                    "CheckboxGroup": {
+                        "description": "A CheckboxGroup allows users to select one or more items from a list of choices.",
+                        "api": "reference: https://www.heroui.com/docs/components/checkbox-group"
+                    },
+                    "Chip": {
+                        "description": "A Chip is a small block of essential information that represent an input, attribute, or action.",
+                        "api": "reference: https://www.heroui.com/docs/components/chip"
+                    },
+                    "CircularProgress": {
+                        "description": "Circular progress indicators are utilized to indicate an undetermined wait period or visually represent the duration of a process.",
+                        "api": "reference: https://www.heroui.com/docs/components/circular-progress"
+                    },
+                    "Code": {
+                        "description": "Code is a component used to display inline code.",
+                        "api": "reference: https://www.heroui.com/docs/components/code"
+                    },
+                    "DateInput": {
+                        "description": "DateInput is a component that allows users to enter and edit date and time values using a keyboard. Each part of a date value is displayed in an individually editable segment.",
+                        "api": "reference: https://www.heroui.com/docs/components/date-input"
+                    },
+                    "DatePicker": {
+                        "description": "DatePickers combine a DateInput and a Calendar popover to allow users to enter or select a date and time value.",
+                        "api": "reference: https://www.heroui.com/docs/components/date-picker"
+                    },
+                    "DateRangePicker": {
+                        "description": "Date Range Picker combines two DateInputs and a RangeCalendar popover to allow users to enter or select a date and time range.",
+                        "api": "reference: https://www.heroui.com/docs/components/date-range-picker"
+                    },
+                    "Divider": {
+                        "description": "Divider is a component that separates content in a page.",
+                        "api": "reference: https://www.heroui.com/docs/components/divider"
+                    },
+                    "Dropdown": {
+                        "description": "Displays a list of actions or options that a user can choose.",
+                        "api": "reference: https://www.heroui.com/docs/components/dropdown"
+                    },
+                    "Drawer": {
+                        "description": "Displays a panel that slides in from the edge of the screen, containing supplementary content.",
+                        "api": "reference: https://www.heroui.com/docs/components/drawer"
+                    },
+                    "Form": {
+                        "description": "A form is a group of inputs that allows users to submit data to a server, with support for providing field validation errors.",
+                        "api": "reference: https://www.heroui.com/docs/components/form"
+                    },
+                    "Image": {
+                        "description": "The Image component is used to display images with support for fallback.",
+                        "api": "reference: https://www.heroui.com/docs/components/image"
+                    },
+                    "Input": {
+                        "description": "Input is a component that allows users to enter text. It can be used to get user inputs in forms, search fields, and more.",
+                        "api": "reference: https://www.heroui.com/docs/components/input"
+                    },
+                    "InputOtp": {
+                        "description": "The InputOtp component enables users to enter one-time passwords (OTP). It is built on top of the input-otp library by @guilherme_rodz.",
+                        "api": "reference: https://www.heroui.com/docs/components/input-otp"
+                    },
+                    "Kbd": {
+                        "description": "Keyboard key is a component to display which key or combination of keys performs a given action.",
+                        "api": "reference: https://www.heroui.com/docs/components/kbd"
+                    },
+                    "Link": {
+                        "description": "Links allow users to click their way from page to page. This component is styled to resemble a hyperlink and semantically renders an <a>",
+                        "api": "reference: https://www.heroui.com/docs/components/link"
+                    },
+                    "Listbox": {
+                        "description": "A listbox displays a list of options and allows a user to select one or more of them.",
+                        "api": "reference: https://www.heroui.com/docs/components/listbox"
+                    },
+                    "Modal": {
+                        "description": "Displays a dialog with custom content that requires attention or provides additional information.",
+                        "api": "reference: https://www.heroui.com/docs/components/modal"
+                    },
+                    "Navbar": {
+                        "description": "A responsive navigation header positioned on top side of your page that includes support for branding, links, navigation, collapse menu and more.",
+                        "api": "reference: https://www.heroui.com/docs/components/navbar"
+                    },
+                    "NumberInput": {
+                        "description": "The numeric input component is designed for users to enter a number, and increase or decrease the value using stepper buttons",
+                        "api": "reference: https://www.heroui.com/docs/components/number-input"
+                    },
+                    "Pagination": {
+                        "description": "The Pagination component allows you to display active page and navigate between multiple pages.",
+                        "api": "reference: https://www.heroui.com/docs/components/pagination"
+                    },
+                    "Popover": {
+                        "description": "Popover is a non-modal dialog that floats around its disclosure. It's commonly used for displaying additional rich content on top of something.",
+                        "api": "reference: https://www.heroui.com/docs/components/popover"
+                    },
+                    "Progress": {
+                        "description": "The Progress component allows you to view the progress of any activity.",
+                        "api": "reference: https://www.heroui.com/docs/components/progress"
+                    },
+                    "RadioGroup": {
+                        "description": "Radio Group allow users to select a single option from a list of mutually exclusive options.",
+                        "api": "reference: https://www.heroui.com/docs/components/radio-group"
+                    },
+                    "RangeCalendar": {
+                        "description": "A range calendar consists of a grouping element containing one or more date grids (e.g. months), and a previous and next button for navigating through time. Each calendar grid consists of cells containing button elements that can be pressed and navigated to using the arrow keys to select a date range. Once a start date is selected, the user can navigate to another date using the keyboard or by hovering over it, and clicking it or pressing the Enter key commits the selected date range.",
+                        "api": "reference: https://www.heroui.com/docs/components/range-calendar"
+                    },
+                    "ScrollShadow": {
+                        "description": "Applies top and bottom shadows when content overflows on scroll.",
+                        "api": "reference: https://www.heroui.com/docs/components/scroll-shadow"
+                    },
+                    "Select": {
+                        "description": "A select displays a collapsible list of options and allows a user to select one or more of them.",
+                        "api": "reference: https://www.heroui.com/docs/components/select"
+                    },
+                    "Skeleton": {
+                        "description": "Skeleton is a placeholder to show a loading state and the expected shape of a component.",
+                        "api": "reference: https://www.heroui.com/docs/components/skeleton"
+                    },
+                    "Slider": {
+                        "description": "A slider allows a user to select one or more values within a range.",
+                        "api": "reference: https://www.heroui.com/docs/components/slider"
+                    },
+                    "Snippet": {
+                        "description": "Snippet is a component that can be used to display inline or multiline code snippets.",
+                        "api": "reference: https://www.heroui.com/docs/components/snippet"
+                    },
+                    "Spacer": {
+                        "description": "Spacer is a component used to add space between components.",
+                        "api": "reference: https://www.heroui.com/docs/components/spacer"
+                    },
+                    "Spinner": {
+                        "description": "Spinner express an unspecified wait time or display the length of a process.",
+                        "api": "reference: https://www.heroui.com/docs/components/spinner"
+                    },
+                    "Switch": {
+                        "description": "The Switch component is used as an alternative between checked and not checked states.",
+                        "api": "reference: https://www.heroui.com/docs/components/switch"
+                    },
+                    "Table": {
+                        "description": "Tables are used to display tabular data using rows and columns. They allow users to quickly scan, sort, compare, and take action on large amounts of data.",
+                        "api": "reference: https://www.heroui.com/docs/components/table"
+                    },
+                    "Tabs": {
+                        "description": "Tabs organize content into multiple sections and allow users to navigate between them.",
+                        "api": "reference: https://www.heroui.com/docs/components/tabs"
+                    },
+                    "Toast": {
+                        "description": "Toasts are temporary notifications that provide concise feedback about an action or event.",
+                        "api": "reference: https://www.heroui.com/docs/components/toast"
+                    },
+                    "TextArea": {
+                        "description": "Textarea component is a multi-line Input which allows you to write large texts.",
+                        "api": "reference: https://www.heroui.com/docs/components/textarea"
+                    },
+                    "TimeInput": {
+                        "description": "The TimeInput component consists of a label, and a group of segments representing each unit of a time (e.g. hours, minutes, and seconds). Each segment is individually focusable and editable by the user, by typing or using the arrow keys to increment and decrement the value. This approach allows values to be formatted and parsed correctly regardless of the locale or time format, and offers an easy and error-free way to edit times using the keyboard.",
+                        "api": "reference: https://www.heroui.com/docs/components/time-input"
+                    },
+                    "Tooltip": {
+                        "description": "Tooltips display a brief, informative message that appears when a user interacts with an element.",
+                        "api": "reference: https://www.heroui.com/docs/components/tooltip"
+                    },
+                    "User": {
+                        "description": "Display user information with avatar and name.",
+                        "api": "reference: https://www.heroui.com/docs/components/user"
+                    }
+                }
+            }
+        }
+    ]
   }
 ]
