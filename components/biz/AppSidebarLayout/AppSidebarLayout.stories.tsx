@@ -126,3 +126,63 @@ export const WithSettingsActive: Story = {
     },
   },
 }
+
+export const EmptyMenu: Story = {
+  render: () => (
+    <StoryWrapper navMain={[]} user={mockData.user}>
+      <ExampleContent />
+    </StoryWrapper>
+  ),
+  name: "Empty Menu",
+}
+
+export const SingleMenuItem: Story = {
+  render: () => (
+    <StoryWrapper navMain={[mockData.navMain[0]]} user={mockData.user}>
+      <ExampleContent />
+    </StoryWrapper>
+  ),
+  name: "Single Menu Item",
+}
+
+export const ThemeSwitch: Story = {
+  render: () => (
+    <div className="dark bg-zinc-900 min-h-screen">
+      <StoryWrapper navMain={mockData.navMain} user={mockData.user}>
+        <ExampleContent />
+      </StoryWrapper>
+    </div>
+  ),
+  parameters: {
+    backgrounds: {
+      default: "dark",
+      values: [
+        { name: "light", value: "#ffffff" },
+        { name: "dark", value: "#18181b" },
+      ],
+    },
+  },
+  name: "Theme Switch (Dark)",
+}
+
+export const LoadingState: Story = {
+  render: () => (
+    <StoryWrapper navMain={mockData.navMain} user={mockData.user}>
+      <div className="flex items-center justify-center h-96 text-xl text-muted-foreground">
+        Loading...
+      </div>
+    </StoryWrapper>
+  ),
+  name: "Loading State",
+}
+
+export const ErrorState: Story = {
+  render: () => (
+    <StoryWrapper navMain={mockData.navMain} user={mockData.user}>
+      <div className="flex items-center justify-center h-96 text-xl text-destructive">
+        Loading failed, please try again.
+      </div>
+    </StoryWrapper>
+  ),
+  name: "Error State",
+}
