@@ -11,24 +11,30 @@ import {
 import type { AppHeaderProps } from "./interface"
 import React from "react"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Brain } from "lucide-react"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { useProviderModelModal } from "@/app/commons/ProviderModelModal"
 
 export function AppHeader({
   className,
   breadcrumbs,
   showSidebarTrigger = true,
 }: AppHeaderProps) {
+  const { openModal } = useProviderModelModal() // now it's safe to call
+
   return (
     <header
       className={`flex h-16 shrink-0 items-center gap-2 ${className || ""}`}
     >
-      <div className="flex items-center gap-2 px-4">
+      <div className="w-full flex items-center gap-2 px-4">
         {showSidebarTrigger && (
           <>
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
           </>
         )}
-        <Breadcrumb>
+        <Breadcrumb className="flex-1">
           <BreadcrumbList>
             {breadcrumbs?.map((item, index) => (
               <React.Fragment key={item.label}>
@@ -52,6 +58,20 @@ export function AppHeader({
             ))}
           </BreadcrumbList>
         </Breadcrumb>
+        <div className="flex items-center gap-2">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline" size="icon" onClick={openModal}>
+                  <Brain />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>AI Provider Settings</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
       </div>
     </header>
   )
