@@ -29,4 +29,37 @@ declare namespace CodegenApi {
       | "codeRendererUrl"
     >
   }
+
+  // MCP component list request
+  export interface McpComponentListRequest {
+    codegenName: string
+  }
+  // MCP component list response
+  export interface McpComponentListResponse {
+    markdown: string
+    components: {
+      [libraryName: string]: {
+        [componentName: string]: {
+          description: string
+        }
+      }
+    }
+  }
+
+  // MCP component detail request
+  export interface McpComponentDetailRequest {
+    codegenName: string
+    libraryName: string
+    componentNames: string[]
+  }
+  // MCP component detail response
+  export interface McpComponentDetailResponse {
+    libraryName: string
+    components: {
+      [componentName: string]: {
+        description: string
+        api: string
+      }
+    }
+  }
 }
