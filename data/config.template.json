@@ -30,6 +30,13 @@
           "baseURL": "https://api.302.ai/v1",
           "features": ["vision"],
           "apiKey": "sk-****"
+        },
+        {
+          "model": "kimi-k2-0711-preview",
+          "title": "Kimi K2-0711-Preview (Moonshot)",
+          "baseURL": "https://api.moonshot.cn/v1",
+          "apiKey": "sk-****",
+          "features": ["vision"]
         }
       ]
     },
@@ -73,6 +80,35 @@
           "baseURL": "http://localhost:11434/api",
           "features": ["vision"],
           "apiKey": ""
+        }
+      ]
+    },
+    {
+      "provider": "openrouter",
+      "models": [
+        {
+          "model": "moonshotai/kimi-k2",
+          "title": "Kimi K2",
+          "baseURL": "https://openrouter.ai/api/v1",
+          "features": ["vision"],
+          "apiKey": "sk-****",
+          "extraBody": {
+            "provider": {
+              "only": ["Together"]
+            }
+          }
+        },
+        {
+          "model": "anthropic/claude-sonnet-4",
+          "title": "Claude 4 Sonnet",
+          "baseURL": "https://openrouter.ai/api/v1",
+          "features": ["vision"],
+          "apiKey": "sk-****",
+          "extraBody": {
+            "provider": {
+              "only": ["Anthropic"]
+            }
+          }
         }
       ]
     }

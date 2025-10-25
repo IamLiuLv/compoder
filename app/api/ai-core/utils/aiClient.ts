@@ -2,6 +2,7 @@ import { createOpenAI } from "@ai-sdk/openai"
 import { createAnthropic } from "@ai-sdk/anthropic"
 import { createDeepSeek } from "@ai-sdk/deepseek"
 import { createOllama } from "ollama-ai-provider"
+import { createOpenRouter } from "@openrouter/ai-sdk-provider"
 
 import { findModelConfig, type AIProvider } from "@/lib/config/ai-providers"
 
@@ -30,6 +31,12 @@ export const getAIClient = (provider: AIProvider, model: string) => {
         baseURL: modelConfig.baseURL,
         headers: modelConfig.headers || {},
       })(modelConfig.model)
+    case "openrouter":
+      return createOpenRouter({
+        baseURL: modelConfig.baseURL,
+        apiKey: modelConfig.apiKey,
+        extraBody: modelConfig.extraBody || {},
+      }).chat(modelConfig.model)
     default:
       throw new Error(`Unsupported AI provider: ${provider}`)
   }

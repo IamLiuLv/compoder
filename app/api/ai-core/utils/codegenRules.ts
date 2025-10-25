@@ -125,14 +125,15 @@ export function getPrivateDocsDescription(rules: CodegenRule[]): string {
         if (components.hasOwnProperty(key)) {
           const component = components[key]
           componentDescriptions += `
-  ${key}: ${component.description}
+  {componentName: ${key}, description: ${component.description}}
   `
         }
       }
 
       const template = `
-  - Components in ${namespace}, below are descriptions of ${namespace} components (can only use component names listed below)
+  - Components in "${namespace}", below are descriptions of "${namespace}" components (can only use component names listed below)
   ---------------------
+  Important: You can only use the component name keys listed below in the XML response, do not use other component names. Do not be influenced by component names in the user-provided code, as the components in the user's code are likely already included in the components listed below.
   ${componentDescriptions.trim()}
   ---------------------
   `

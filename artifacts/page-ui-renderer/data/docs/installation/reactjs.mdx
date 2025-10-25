@@ -1,0 +1,357 @@
+---
+title: 'React.js installation guide'
+date: '2024-05-19'
+lastmod: '2024-05-19'
+tags:
+  - 'documentation'
+  - 'guide'
+  - 'getting-started'
+  - 'installation'
+  - 'react'
+  - 'tailwindcss'
+
+summary: 'Learn how to install Page UI landing page components in your React.js app bootstrapped with Vite. Install Tailwind CSS to get started, then configure the codebase.'
+layout: PostHub
+---
+
+<span className="text-xl not-prose">
+  Learn how to install Page UI in your React.js app.
+</span>
+
+<br />
+
+<Protip
+  description={
+    <>
+      Skip the setup and use{' '}
+      <a className="fancy-link" href="https://shipixen.com">
+        Shipixen
+      </a>{' '}
+      to get a codebase with all components set up.
+    </>
+  }
+/>
+
+<br />
+
+<StepCard stepNumber={1}>
+## Create a new Next.js app
+Start by creating a new React app. The current most popular way to do this is by using Vite. You can use the following command:
+
+```bash
+npm create vite@latest my-app -- --template react-ts # NB: you can replace my-app with your app name
+```
+
+</StepCard>
+
+<br />
+
+<StepCard stepNumber={2}>
+
+## Install dependencies
+
+```bash
+cd my-app # NB: if you used a different app name, replace my-app with your app name
+npm install -D tailwindcss@3 postcss autoprefixer @tailwindcss/forms @tailwindcss/typography tailwindcss-animate embla-carousel-react class-variance-authority clsx tailwind-merge lucide-react @radix-ui/react-accordion @radix-ui/react-tabs @radix-ui/react-label
+```
+
+</StepCard>
+
+<br />
+
+<StepCard stepNumber={3}>
+
+## Setup Tailwind CSS
+
+```bash
+npx tailwindcss init -p
+```
+
+</StepCard>
+
+<br />
+
+<StepCard stepNumber={4}>
+
+## Run the Page UI CLI
+
+```bash
+npx @page-ui/wizard@latest init --template react
+```
+
+</StepCard>
+
+<br />
+
+<StepCard stepNumber={5}>
+
+## Configure TypeScript aliases
+
+Add the following code to the tsconfig.json file to resolve paths: <br/>
+
+```diff-json:tsconfig.json
+{
+  "compilerOptions": {
++   "baseUrl": ".",
++   "paths": {
++     "@/*": [
++       "./src/*"
++     ]
++   },
+
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
+
+```
+
+</StepCard>
+
+<br />
+
+<StepCard stepNumber={6}>
+
+## Configure Vite
+
+Add the following code to the `vite.config.ts` so your app can resolve paths without error:<br/>
+
+```bash
+npm i -D @types/node
+```
+
+```diff-ts:vite.config.ts
++import path from "path"
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
++ resolve: {
++   alias: {
++     "@": path.resolve(__dirname, "./src"),
++   },
++ },
+})
+```
+
+</StepCard>
+
+<br />
+
+<StepCard stepNumber={7}>
+
+## Configure CSS
+
+Add the below to your `index.css` file.<br/>
+
+<StepCode>
+
+```css:app/index.css
+@import url('https://fonts.googleapis.com/css?family=Inter:400,500,600,700,800&display=swap'); /* Optional: import any Google font from https://fonts.google.com/ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-space-default: 'Inter';
+    --font-space-display: 'Inter';
+    --hard-shadow: 0px 29px 52px 0px rgba(0, 0, 0, 0.4),
+      22px 25px 16px 0px rgba(0, 0, 0, 0.2);
+    --hard-shadow-left: 0px 29px 52px 0px rgba(0, 0, 0, 0.4),
+      -22px 25px 16px 0px rgba(0, 0, 0, 0.2);
+    /* If you use Shadcn UI already, you should already have these variables defined */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --radius: 0.5rem;
+    --primary-lighter-hex: theme('colors.primary.200');
+    --secondary-lighter-hex: theme('colors.secondary.200');
+    --primary-dark-hex: theme('colors.primary.800');
+    --secondary-dark-hex: theme('colors.secondary.800');
+  }
+
+  .dark {
+    /* If you use Shadcn UI already, you can skip this block. */
+    --background: 20 14.3% 4.1%;
+    --foreground: 0 0% 95%;
+    --card: 24 9.8% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 95%;
+    --primary-foreground: 144.9 80.4% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+  }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  *,
+  ::before,
+  ::after {
+    @apply border-gray-100 dark:border-neutral-800;
+  }
+
+  * {
+    @apply font-sans;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold font-display;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /**
+   * Perspective (used for images etc.)
+   */
+  .perspective-none {
+    transform: none;
+  }
+
+  .perspective-left {
+    box-shadow: var(--hard-shadow);
+    transform: perspective(400em) rotateY(-15deg) rotateX(6deg)
+      skew(-8deg, 4deg) translate3d(-4%, -2%, 0) scale(0.8);
+  }
+
+  .perspective-right {
+    box-shadow: var(--hard-shadow-left);
+    transform: perspective(400em) rotateY(15deg) rotateX(6deg) skew(8deg, -4deg)
+      translate3d(4%, -2%, 0) scale(0.8);
+  }
+
+  .perspective-bottom {
+    box-shadow: var(--hard-shadow);
+    transform: translateY(-4%) perspective(400em) rotateX(18deg) scale(0.9);
+  }
+
+  .perspective-bottom-lg {
+    box-shadow: var(--hard-shadow);
+    transform: perspective(400em) translate3d(0, -6%, 0) rotateX(34deg)
+      scale(0.8);
+  }
+
+  .perspective-paper {
+    box-shadow: var(--hard-shadow);
+    transform: rotateX(40deg) rotate(40deg) scale(0.8);
+  }
+
+  .perspective-paper-left {
+    box-shadow: var(--hard-shadow-left);
+    transform: rotateX(40deg) rotate(-40deg) scale(0.8);
+  }
+
+  /**
+   * Custom shadows
+   */
+  .hard-shadow {
+    box-shadow: var(--hard-shadow);
+  }
+
+  .hard-shadow-left {
+    box-shadow: var(--hard-shadow-left);
+  }
+
+  /**
+   * Container utilities
+   */
+  .container-narrow {
+    @apply max-w-4xl;
+  }
+
+  .container-wide {
+    @apply xl:max-w-6xl;
+  }
+
+  .container-ultrawide {
+    @apply xl:max-w-7xl;
+  }
+}
+
+```
+
+</StepCode>
+
+<br />
+
+**Note**: when you create a new React app with Vite, you'll get some sample styles in the `index.css` file as well as `app.css`. You can remove all of those safely.
+
+</StepCard>
+
+<br />
+
+## Troubleshooting
+
+Something not quite right? Check out the [sample repository](https://github.com/Shipixen/page-ui-react-vite-example) for a full working example.
+
+## Theming
+
+Get new themes directly from the docs (open any component documentation → select a theme from the dropdown and scroll down to copy to clipboard).
+
+You can also [explore themes here](https://shipixen.com/color-theme-explorer-shadcn).
+
+Alternatively, you can change `data/config/color.js` manually.
+
+## Next steps
+
+Start adding components to your Next.js app. <br/>
+
+- copy & paste any section from [templates](https://shipixen.com/demo/landing-page-templates) (turn on thief mode)
+- see a gigantic collection of [usage examples](https://shipixen.com/demo/landing-page-component-examples)
+- go to the [component documentation](/docs/landing-page-components) to find more usage examples and documentation on props and customization.

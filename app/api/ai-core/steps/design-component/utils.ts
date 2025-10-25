@@ -222,8 +222,6 @@ export async function generateComponentDesign(
         throw new Error("No valid XML found in the response")
       }
 
-      console.log("xmlMatch", xmlMatch[0])
-
       // Import the XML parser from the parser.ts file
       const { transformComponentDesignFromXml } = await import(
         "@/lib/xml-message-parser/parser"
@@ -231,8 +229,6 @@ export async function generateComponentDesign(
 
       // Parse the XML
       parserCompletion = transformComponentDesignFromXml(xmlMatch[0])
-
-      console.log("parsedXml", parserCompletion)
     } catch (parseError) {
       throw new Error(`Failed to parse AI response as valid XML: ${parseError}`)
     }
