@@ -9,25 +9,24 @@ export const mcpCommand = new Command("mcp").description(
 // mcp server 命令
 mcpCommand
   .command("server")
-  .argument("<codegenName>", "Name of the codegen to serve")
-  .description("Start MCP server for the specified codegen")
+  .description("Start MCP server for Compoder components")
   .option(
     "--api-base-url <url>",
     "Base URL for the Compoder API",
     "http://localhost:3000",
   )
   .option("--debug", "Enable debug logging")
-  .action(async (codegenName: string, options: any) => {
+  .action(async (options: any) => {
     // 设置调试模式
     if (options.debug) {
       process.env.DEBUG = "1"
     }
 
-    Logger.info(`Starting MCP server for codegen: "${codegenName}"`)
+    Logger.info("Starting MCP server for Compoder components")
     Logger.debug(`API Base URL: ${options.apiBaseUrl}`)
 
     try {
-      await startMcpServer(codegenName, {
+      await startMcpServer({
         apiBaseUrl: options.apiBaseUrl,
       })
     } catch (error) {

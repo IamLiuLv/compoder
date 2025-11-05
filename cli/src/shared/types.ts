@@ -20,6 +20,53 @@ export interface McpComponentDetailResponse {
   }
 }
 
+export interface CodegenListResponse {
+  markdown: string
+  codegens: {
+    [codegenName: string]: {
+      title: string
+      description: string
+    }
+  }
+}
+
+export interface CodegenRule {
+  type:
+    | "public-components"
+    | "styles"
+    | "private-components"
+    | "file-structure"
+    | "attention-rules"
+  description: string
+  prompt?: string
+  dataSet?: string[]
+  docs?: {
+    [libraryName: string]: {
+      [componentName: string]: {
+        description: string
+        api: string
+      }
+    }
+  }
+}
+
+export interface CodegenDetailResponse {
+  title: string
+  description: string
+  fullStack: string
+  guides: string[]
+  codeRendererUrl: string
+  rules: CodegenRule[]
+}
+
+export type AiClient = "cursor" | "claude-code"
+
+export interface CompoderConfig {
+  codegen: string
+  aiClients: AiClient[]
+  version: string
+}
+
 // CLI配置类型
 export interface CliConfig {
   apiBaseUrl: string

@@ -2,6 +2,8 @@ import axios, { AxiosInstance } from "axios"
 import {
   McpComponentListResponse,
   McpComponentDetailResponse,
+  CodegenListResponse,
+  CodegenDetailResponse,
   CliError,
 } from "./types"
 
@@ -69,6 +71,24 @@ export class ApiClient {
         },
       },
     )
+    return response.data
+  }
+
+  /**
+   * 获取codegen列表
+   */
+  async getCodegenList(): Promise<CodegenListResponse> {
+    const response = await this.client.get("/api/codegen/mcp/codegen-list")
+    return response.data
+  }
+
+  /**
+   * 获取codegen详情
+   */
+  async getCodegenDetail(codegenName: string): Promise<CodegenDetailResponse> {
+    const response = await this.client.get("/api/codegen/mcp/codegen-detail", {
+      params: { codegenName },
+    })
     return response.data
   }
 

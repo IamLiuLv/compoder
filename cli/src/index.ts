@@ -2,6 +2,8 @@
 
 import { Command } from "commander"
 import { mcpCommand } from "./commands/mcp"
+import { initCommand } from "./commands/init"
+import { updateCommand } from "./commands/update"
 import { Logger } from "./shared/utils"
 
 const program = new Command()
@@ -11,7 +13,9 @@ program
   .description("Compoder CLI - AI-Powered Component Code Generator")
   .version("0.0.1")
 
-// 注册MCP子命令
+// 注册子命令
+program.addCommand(initCommand)
+program.addCommand(updateCommand)
 program.addCommand(mcpCommand)
 
 // 未来可以添加更多子命令

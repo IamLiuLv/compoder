@@ -8,12 +8,15 @@ import {
 import { ApiClient } from "../../shared/api-client"
 import { ComponentListTool } from "./tools/component-list"
 import { ComponentDetailTool } from "./tools/component-detail"
-import { ComponentDetailToolArgs } from "../../shared/types"
+import { CodegenListTool } from "./tools/codegen-list"
+import {
+  ComponentDetailToolArgs,
+  ComponentListToolArgs,
+} from "../../shared/types"
 import { getConfig } from "../../config/default"
-import { Logger, validateCodegenName } from "../../shared/utils"
+import { Logger } from "../../shared/utils"
 
 export interface McpServerOptions {
-  codegenName: string
   apiBaseUrl?: string
 }
 
@@ -22,6 +25,7 @@ export class McpServer {
   private apiClient: ApiClient
   private componentListTool: ComponentListTool
   private componentDetailTool: ComponentDetailTool
+  private codegenListTool: CodegenListTool
 
   constructor(private options: McpServerOptions) {
     const config = getConfig()
@@ -32,6 +36,7 @@ export class McpServer {
     // 初始化工具
     this.componentListTool = new ComponentListTool(this.apiClient)
     this.componentDetailTool = new ComponentDetailTool(this.apiClient)
+    this.codegenListTool = new CodegenListTool(this.apiClient)
 
     // 初始化MCP服务器
     this.server = new Server(
@@ -57,6 +62,11 @@ export class McpServer {
       return {
         tools: [
           {
+            name: this.codegenListTool.name,
+            description: this.codegenListTool.description,
+            inputSchema: this.codegenListTool.inputSchema,
+          },
+          {
             name: this.componentListTool.name,
             description: this.componentListTool.description,
             inputSchema: this.componentListTool.inputSchema,
@@ -78,21 +88,18 @@ export class McpServer {
 
       try {
         switch (name) {
+          case this.codegenListTool.name:
+            return await this.codegenListTool.call()
+
           case this.componentListTool.name:
-            // 自动注入codegenName
-            const listArgs = {
-              ...args,
-              codegenName: this.options.codegenName,
-            }
-            return await this.componentListTool.call(listArgs)
+            return await this.componentListTool.call(
+              args as unknown as ComponentListToolArgs,
+            )
 
           case this.componentDetailTool.name:
-            // 自动注入codegenName
-            const detailArgs = {
-              ...args,
-              codegenName: this.options.codegenName,
-            } as ComponentDetailToolArgs
-            return await this.componentDetailTool.call(detailArgs)
+            return await this.componentDetailTool.call(
+              args as unknown as ComponentDetailToolArgs,
+            )
 
           default:
             throw new Error(`Unknown tool: ${name}`)
@@ -113,12 +120,7 @@ export class McpServer {
   }
 
   async start() {
-    Logger.info(`Starting MCP server for codegen: ${this.options.codegenName}`)
-
-    // 验证codegen名称
-    if (!validateCodegenName(this.options.codegenName)) {
-      throw new Error("Invalid codegen name format")
-    }
+    Logger.info("Starting MCP server for Compoder components")
 
     // 检查API连接
     try {
@@ -139,6 +141,9 @@ export class McpServer {
     Logger.success("MCP server started successfully")
     Logger.info("Available tools:")
     Logger.info(
+      `  - ${this.codegenListTool.name}: ${this.codegenListTool.description}`,
+    )
+    Logger.info(
       `  - ${this.componentListTool.name}: ${this.componentListTool.description}`,
     )
     Logger.info(
@@ -150,12 +155,9 @@ export class McpServer {
 /**
  * 启动MCP服务器
  */
-export async function startMcpServer(codegenName: string, options: any = {}) {
+export async function startMcpServer(options: McpServerOptions = {}) {
   try {
-    const server = new McpServer({
-      codegenName,
-      apiBaseUrl: options.apiBaseUrl,
-    })
+    const server = new McpServer(options)
 
     await server.start()
   } catch (error) {
