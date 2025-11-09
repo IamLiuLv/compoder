@@ -59,6 +59,30 @@ export async function findCodegenById(id: string) {
   return codegen
 }
 
+export async function findCodegenByName(name: string) {
+  const codegen = await CodegenModel.findOne({ title: name })
+    .select("_id title description fullStack guides codeRendererUrl rules")
+    .lean<
+      Pick<
+        Codegen,
+        | "title"
+        | "description"
+        | "fullStack"
+        | "guides"
+        | "codeRendererUrl"
+        | "rules"
+      > & {
+        _id: string
+      }
+    >()
+
+  if (!codegen) {
+    throw new Error("Codegen not found")
+  }
+
+  return codegen
+}
+
 export async function getCodeRendererUrl(codegenId: string) {
   const codegen = await CodegenModel.findById(codegenId)
   return codegen?.codeRendererUrl

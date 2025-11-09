@@ -1,0 +1,41 @@
+{
+  "name": "compoder-cli",
+  "version": "0.0.1",
+  "description": "Compoder CLI - AI-Powered Component Code Generator",
+  "main": "dist/index.js",
+  "bin": {
+    "compoder": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "start": "node dist/index.js",
+    "test:mcp": "node test-mcp-server.js",
+    "test:mcp:debug": "node test-mcp-server.js --debug"
+  },
+  "keywords": [
+    "ai",
+    "code-generation",
+    "component",
+    "mcp",
+    "cli"
+  ],
+  "author": "Compoder Team",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.2",
+    "commander": "^11.0.0",
+    "chalk": "^4.1.2",
+    "axios": "^1.7.9",
+    "inquirer": "^8.2.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/inquirer": "^8.2.6",
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
