@@ -1,8 +1,0 @@
-{
-    "mcpServers": {
-        "compoder": {
-            "command": "compoder",
-            "args": ["mcp", "server", "Landing Page Codegen"]
-        }
-    }
-}
