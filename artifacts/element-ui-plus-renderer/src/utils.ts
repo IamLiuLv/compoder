@@ -106,6 +106,8 @@ export function createComponentFromString(componentString: string) {
     return null
   }
 
+  console.log("componentOptions", componentOptions)
+
   // 使用 defineComponent 来创建组件
   const component = defineComponent({
     ...componentOptions,
