@@ -35,3 +35,30 @@ export const getCodegenDetail = async (
     throw error
   }
 }
+
+export const createCodegen = async (data: any) => {
+  const response = await request("/codegen/create", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: { "Content-Type": "application/json" },
+  })
+  return response.json()
+}
+
+export const editCodegen = async (data: any) => {
+  const response = await request("/codegen/edit", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: { "Content-Type": "application/json" },
+  })
+  return response.json()
+}
+
+export const deleteCodegen = async (_id: string) => {
+  const response = await request("/codegen/delete", {
+    method: "POST",
+    body: JSON.stringify({ _id }),
+    headers: { "Content-Type": "application/json" },
+  })
+  return response.json()
+}
